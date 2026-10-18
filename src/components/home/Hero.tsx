@@ -25,14 +25,15 @@ export function Hero({ settings }: HeroProps) {
             Advancing Knowledge Across Disciplines
           </h1>
 
-          {/* Subtitle with Hindi translation */}
+          {/* Subtitle */}
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {settings.journalName} (JIIR) is an international, peer-reviewed, open-access academic journal
-            publishing innovative multidisciplinary research that bridges theory and impactful real-world practice.
+            publishing innovative multidisciplinary research across science, engineering, management, humanities, and hospitality.
           </p>
 
-          <p className="text-sm font-medium text-navy-700 dark:text-navy-300 font-devanagari">
-            {settings.journalNameHi} • वैश्विक मानकों के अनुरूप सहकर्मी-समीक्षित शोध मंच
+          {/* Motto / Slogan from Official Logo */}
+          <p className="text-sm font-semibold tracking-wider text-brand-orange uppercase">
+            Educate · Innovate · Collaborate
           </p>
 
           {/* CTAs */}
@@ -62,15 +63,15 @@ export function Hero({ settings }: HeroProps) {
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-brand-green" />
-              <span>Bilingual: English & Hindi</span>
+              <span>Crossref DOI Registered</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-brand-green" />
-              <span>Open Access (CC BY-NC 4.0)</span>
+              <span>Gold Open Access (CC BY 4.0)</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-brand-green" />
-              <span>Monthly Fast-Track Publication</span>
+              <span>Monthly Rapid Editorial Decisions</span>
             </div>
           </div>
         </div>

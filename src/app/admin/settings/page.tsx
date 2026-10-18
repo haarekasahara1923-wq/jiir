@@ -26,7 +26,7 @@ export default function AdminSettingsPage() {
 
   // Journal Info
   const [journalName, setJournalName] = useState("Journal of Interdisciplinary Innovation & Research");
-  const [journalNameHi, setJournalNameHi] = useState("अंतःविषय नवाचार एवं अनुसंधान जर्नल");
+  const [journalNameHi, setJournalNameHi] = useState("");
   const [abbreviation, setAbbreviation] = useState("JIIR");
   const [tagline, setTagline] = useState("Advancing Knowledge Across Disciplines");
   const [issnPrint, setIssnPrint] = useState("XXXX-XXXX");
@@ -42,7 +42,7 @@ export default function AdminSettingsPage() {
 
   // Toggles
   const [maintenanceMode, setMaintenanceMode] = useState(false);
-  const [hindiEnabled, setHindiEnabled] = useState(true);
+  const [hindiEnabled, setHindiEnabled] = useState(false);
 
   // States
   const [loading, setLoading] = useState(false);
@@ -534,26 +534,14 @@ export default function AdminSettingsPage() {
             Journal Identity & Nomenclature
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-muted-foreground font-medium mb-1">Journal Full Name (English)</label>
-              <input
-                type="text"
-                value={journalName}
-                onChange={(e) => setJournalName(e.target.value)}
-                className="w-full p-2.5 rounded-lg border border-border bg-background text-foreground"
-              />
-            </div>
-
-            <div>
-              <label className="block text-muted-foreground font-medium mb-1">Journal Full Name (Hindi)</label>
-              <input
-                type="text"
-                value={journalNameHi}
-                onChange={(e) => setJournalNameHi(e.target.value)}
-                className="w-full p-2.5 rounded-lg border border-border bg-background text-foreground"
-              />
-            </div>
+          <div>
+            <label className="block text-muted-foreground font-medium mb-1">Journal Full Name</label>
+            <input
+              type="text"
+              value={journalName}
+              onChange={(e) => setJournalName(e.target.value)}
+              className="w-full p-2.5 rounded-lg border border-border bg-background text-foreground font-semibold"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -682,28 +670,6 @@ export default function AdminSettingsPage() {
               <div
                 className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
                   maintenanceMode ? "translate-x-5" : "translate-x-0"
-                }`}
-              />
-            </button>
-          </div>
-
-          <div className="flex items-center justify-between pt-3 border-t border-border">
-            <div>
-              <p className="font-semibold text-foreground text-xs">Bilingual Support (Hindi / English)</p>
-              <p className="text-[11px] text-muted-foreground">
-                Enable language selector switch for researchers across India.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setHindiEnabled(!hindiEnabled)}
-              className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${
-                hindiEnabled ? "bg-emerald-600" : "bg-muted"
-              }`}
-            >
-              <div
-                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
-                  hindiEnabled ? "translate-x-5" : "translate-x-0"
                 }`}
               />
             </button>

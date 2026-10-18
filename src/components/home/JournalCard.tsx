@@ -27,7 +27,7 @@ export function JournalCard({ settings }: JournalCardProps) {
                 Monthly Frequency
               </span>
               <span className="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-950 text-amber-800 dark:text-amber-200 font-semibold border border-amber-200 dark:border-amber-800">
-                English & Hindi
+                International Circulation
               </span>
             </div>
             <div>

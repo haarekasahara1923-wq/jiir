@@ -526,11 +526,10 @@ export default function AdminCmsPages() {
 
             {/* Modal Body */}
             <form onSubmit={handleSavePage} className="p-6 space-y-4 text-xs overflow-y-auto flex-1">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-muted-foreground font-medium mb-1">
-                    Page Title (English) *
-                  </label>
+              <div>
+                <label className="block text-muted-foreground font-medium mb-1">
+                  Page Title *
+                </label>
                   <input
                     type="text"
                     value={formTitle}
@@ -550,20 +549,6 @@ export default function AdminCmsPages() {
                     required
                   />
                 </div>
-
-                <div>
-                  <label className="block text-muted-foreground font-medium mb-1">
-                    Page Title (Hindi / Optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={formTitleHi}
-                    onChange={(e) => setFormTitleHi(e.target.value)}
-                    placeholder="e.g. सहकर्मी समीक्षा मानक"
-                    className="w-full p-2.5 rounded-lg border border-border bg-background text-foreground"
-                  />
-                </div>
-              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>

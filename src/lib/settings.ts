@@ -31,7 +31,7 @@ export interface DefaultSiteSettings {
 
 export const defaultSettings: DefaultSiteSettings = {
   journalName: "Journal of Interdisciplinary Innovation & Research",
-  journalNameHi: "अंतःविषय नवाचार एवं अनुसंधान जर्नल",
+  journalNameHi: "",
   abbreviation: "JIIR",
   tagline: "Advancing Knowledge Across Disciplines",
   mottoRing: "Educate · Innovate · Collaborate",
@@ -40,7 +40,7 @@ export const defaultSettings: DefaultSiteSettings = {
   issnPrint: "Applied / In Process",
   publisherName: "JIIR Academic Publishing Group",
   publishingFrequency: "Monthly (12 issues / year)",
-  publicationLanguages: "English & Hindi (द्विभाषी)",
+  publicationLanguages: "English",
   primaryDiscipline: "Multidisciplinary",
   contactEmail: "editor@jiir.in",
   supportEmail: "support@jiir.in",

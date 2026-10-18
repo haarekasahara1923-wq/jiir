@@ -232,8 +232,7 @@ export default function ScholarSubmitWizardPage() {
                 onChange={(e) => setFormData({ ...formData, language: e.target.value })}
                 className="w-full px-3 py-2 text-xs rounded-lg border border-input bg-background"
               >
-                <option value="English">English</option>
-                <option value="Hindi">Hindi (हिंदी)</option>
+                <option value="English">English (Standard Academic)</option>
               </select>
             </div>
           </div>

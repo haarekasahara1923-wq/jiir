@@ -115,13 +115,8 @@ export function Navbar({ settings, navItems }: NavbarProps) {
                                 : "text-foreground/80 hover:bg-muted hover:text-foreground"
                             }`}
                           >
-                            <div>{child.label}</div>
-                            {child.labelHi && (
-                              <div className="text-[10px] text-muted-foreground font-devanagari">
-                                {child.labelHi}
-                              </div>
-                            )}
-                          </Link>
+                              <span>{child.label}</span>
+                            </Link>
                         ))}
                       </div>
                     </div>

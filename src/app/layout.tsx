@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Noto_Sans_Devanagari } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
@@ -7,25 +7,11 @@ import { Toaster } from "@/components/ui/Toaster";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { Analytics } from "@/components/shared/Analytics";
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
-});
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
-});
-
-const notoSansDevanagari = Noto_Sans_Devanagari({
-  subsets: ["devanagari"],
-  variable: "--font-noto-devanagari",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -35,27 +21,42 @@ export const metadata: Metadata = {
     template: "%s | JIIR",
   },
   description:
-    "Journal of Interdisciplinary Innovation & Research (JIIR) — Advancing Knowledge Across Disciplines. A peer-reviewed academic journal publishing original research in management, education, hospitality, science, and technology.",
+    "Journal of Interdisciplinary Innovation & Research (JIIR) — Educate · Innovate · Collaborate. A premier international peer-reviewed academic journal publishing innovative research across management, education, science, technology, and hospitality.",
   keywords: [
     "interdisciplinary research",
     "peer-reviewed journal",
+    "international journal",
     "management",
     "education",
     "science",
     "technology",
+    "hospitality",
     "JIIR",
     "academic journal",
     "research publication",
-    "India",
   ],
-  authors: [{ name: "JIIR Editorial Office" }],
+  authors: [{ name: "JIIR Editorial Secretariat" }],
+  icons: {
+    icon: "/brand/logo.png",
+    shortcut: "/brand/favicon.ico",
+    apple: "/brand/logo.png",
+  },
   openGraph: {
     type: "website",
-    locale: "en_IN",
+    locale: "en_US",
     siteName: "JIIR — Journal of Interdisciplinary Innovation & Research",
+    images: [
+      {
+        url: "/brand/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "JIIR — Journal of Interdisciplinary Innovation & Research",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/brand/og-image.png"],
   },
   robots: {
     index: true,
@@ -69,10 +70,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${playfairDisplay.variable} ${notoSansDevanagari.variable} min-h-screen bg-background font-sans antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning className={poppins.variable}>
+      <body className="min-h-screen bg-background font-sans antialiased text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -81,7 +80,7 @@ export default function RootLayout({
         >
           <SessionProvider>
             <QueryProvider>
-              {/* Skip to content for accessibility */}
+              {/* Accessibility Skip Link */}
               <a
                 href="#main-content"
                 className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] bg-navy-600 text-white px-4 py-2 rounded-md text-sm font-medium"

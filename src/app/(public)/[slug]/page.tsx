@@ -44,15 +44,14 @@ const fallbackPages: Record<
       {
         type: "callout",
         variant: "note",
-        title: "Bilingual Publishing Mandate",
+        title: "International Publication Mandate",
         content:
-          "JIIR is committed to linguistic inclusivity and proudly accepts submissions written in either <strong>English or Hindi</strong>. All Hindi manuscripts are accompanied by English abstracts and metadata to guarantee global indexing and citation discovery.",
+          "JIIR publishes scholarly research in English to ensure global indexing, international peer review, and worldwide citation impact across Crossref and indexing databases.",
       },
     ],
   },
   "journal-information": {
     title: "Journal Information & Governance",
-    titleHi: "पत्रिका की जानकारी एवं विवरण",
     subtitle: "Complete bibliographic identity, frequency, and editorial policies",
     blocks: [
       {
@@ -61,9 +60,8 @@ const fallbackPages: Record<
         rows: [
           ["Full Journal Title", "Journal of Interdisciplinary Innovation & Research"],
           ["Short Abbreviation", "JIIR"],
-          ["Hindi Title", "अंतःविषय नवाचार एवं अनुसंधान जर्नल"],
           ["Publication Frequency", "Monthly (12 Issues Per Calendar Year)"],
-          ["Primary Language", "English & Hindi (द्विभाषी)"],
+          ["Primary Language", "English (International Scholarly Standard)"],
           ["Publishing Model", "Gold Open Access (CC BY-NC 4.0)"],
           ["Review Model", "Double-Blind Peer Review (2 Independent Referees)"],
           ["ISSN (Online)", "Applied / In Process"],
@@ -75,7 +73,6 @@ const fallbackPages: Record<
   },
   "author-guidelines": {
     title: "Author Guidelines & Submission Checklist",
-    titleHi: "लेखकों के लिए दिशानिर्देश",
     subtitle: "Preparation, structural requirements, formatting, and submission protocols",
     blocks: [
       {
@@ -111,7 +108,6 @@ const fallbackPages: Record<
   },
   "article-processing-charges": {
     title: "Article Processing Charges (APC)",
-    titleHi: "आर्टिकल प्रोसेसिंग शुल्क",
     subtitle: "Transparent fee structure, waiver policies, and payment terms",
     blocks: [
       {
@@ -140,7 +136,6 @@ const fallbackPages: Record<
   },
   "publication-ethics": {
     title: "Publication Ethics & Malpractice Statement",
-    titleHi: "प्रकाशन नैतिकता एवं कदाचार निवारण नीति",
     subtitle: "Adherence to COPE Code of Conduct guidelines",
     blocks: [
       {
@@ -166,7 +161,6 @@ const fallbackPages: Record<
   },
   "peer-review-policy": {
     title: "Peer Review Policy & Guidelines",
-    titleHi: "सहकर्मी समीक्षा नीति",
     subtitle: "Double-blind evaluation model ensuring scientific validity",
     blocks: [
       {
@@ -250,11 +244,6 @@ export default async function DynamicPublicPage({ params }: PageProps) {
           <h1 className="text-3xl sm:text-4xl font-serif font-bold text-navy-900 dark:text-white">
             {page.title}
           </h1>
-          {page.titleHi && (
-            <p className="text-base text-muted-foreground font-devanagari">
-              {page.titleHi}
-            </p>
-          )}
           {page.subtitle && (
             <p className="text-sm sm:text-base text-muted-foreground">
               {page.subtitle}

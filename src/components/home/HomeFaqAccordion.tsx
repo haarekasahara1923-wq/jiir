@@ -7,7 +7,6 @@ import { ChevronDown, HelpCircle, ArrowRight } from "lucide-react";
 interface FaqItem {
   id: string;
   question: string;
-  questionHi?: string | null;
   answer: string;
   category: string;
 }
@@ -16,36 +15,31 @@ const defaultFaqs: FaqItem[] = [
   {
     id: "faq-1",
     question: "What is the typical peer-review and publication turnaround time?",
-    questionHi: "सहकर्मी समीक्षा एवं प्रकाशन में कितना समय लगता है?",
     answer: "Initial editorial screening is completed within 2–4 days. The rigorous double-blind peer review process typically takes 2 to 3 weeks. Upon unconditional acceptance and proof approval, papers are published in the next monthly issue or online immediately.",
     category: "Review",
   },
   {
     id: "faq-2",
-    question: "Are papers accepted in both English and Hindi?",
-    questionHi: "क्या शोध पत्र अंग्रेजी और हिंदी दोनों में स्वीकार किए जाते हैं?",
-    answer: "Yes. JIIR is proudly bilingual. We welcome high-calibre submissions written in English or Hindi (द्विभाषी जर्नल). Hindi manuscripts must include an English title, abstract, and keywords for international indexing.",
+    question: "What language should manuscripts be written in?",
+    answer: "JIIR publishes scholarly research in standard academic English to ensure maximum global readership, international indexing, and worldwide citation impact across peer-reviewed databases.",
     category: "Submission",
   },
   {
     id: "faq-3",
     question: "When are Article Processing Charges (APC) payable?",
-    questionHi: "आर्टिकल प्रोसेसिंग शुल्क (APC) का भुगतान कब करना होता है?",
     answer: "APC is only payable AFTER your manuscript has received an unconditional acceptance decision from the Chief Editor. There are zero submission fees. If a manuscript is rejected during peer review, no payment is ever required.",
     category: "Payment",
   },
   {
     id: "faq-4",
     question: "How do authors receive their publication certificates?",
-    questionHi: "लेखकों को उनका प्रकाशन प्रमाण पत्र कैसे प्राप्त होता है?",
     answer: "Immediately upon publication, authors can download an official digital Certificate of Publication directly from their Scholar Portal. Each certificate includes an encrypted QR code linking to permanent online verification.",
     category: "Certificates",
   },
   {
     id: "faq-5",
     question: "What is the plagiarism threshold for JIIR submissions?",
-    questionHi: "शोध पत्र के लिए साहित्यिक चोरी (Plagiarism) की सीमा क्या है?",
-    answer: "In accordance with global COPE guidelines and UGC standards, the maximum allowable similarity index is 15% (excluding references and quotes). Any paper exceeding this is returned for revision before review.",
+    answer: "In accordance with global COPE guidelines and international standards, the maximum allowable similarity index is 15% (excluding references and quotes). Any paper exceeding this is returned for revision before review.",
     category: "Ethics",
   },
 ];
@@ -101,11 +95,6 @@ export function HomeFaqAccordion({ faqs }: { faqs?: FaqItem[] }) {
                       {faq.question}
                     </h3>
                   </div>
-                  {faq.questionHi && (
-                    <p className="text-xs text-muted-foreground font-devanagari pl-0.5">
-                      {faq.questionHi}
-                    </p>
-                  )}
                 </div>
                 <div
                   className={`p-1.5 rounded-full bg-muted text-muted-foreground group-hover:text-foreground transition-transform duration-200 shrink-0 ${

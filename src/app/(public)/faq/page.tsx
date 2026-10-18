@@ -8,7 +8,6 @@ interface Faq {
   id: string;
   category: string;
   question: string;
-  questionHi?: string;
   answer: string;
 }
 
@@ -17,56 +16,48 @@ const allFaqs: Faq[] = [
     id: "f1",
     category: "General",
     question: "What is the scope and discipline focus of JIIR?",
-    questionHi: "JIIR का विषय क्षेत्र और फोकस क्या है?",
     answer: "JIIR publishes original multidisciplinary research across 5 primary pillars: Management & Business, Education & Pedagogy, Hospitality & Tourism Management, Applied Sciences, and Engineering & Technology. Cross-disciplinary research connecting two or more of these areas is especially encouraged.",
   },
   {
     id: "f2",
     category: "Submission",
     question: "How do I submit my manuscript?",
-    questionHi: "मैं अपना शोध पत्र कैसे जमा करूँ?",
     answer: "Manuscripts are submitted directly through our online Scholar Portal. Simply create an author account with your email and password, navigate to 'Submit Manuscript', complete the 5-step metadata wizard, and upload your manuscript file (DOCX or PDF). There is no file size limitation.",
   },
   {
     id: "f3",
     category: "Submission",
-    question: "Can I submit my manuscript in Hindi?",
-    questionHi: "क्या मैं अपना शोध पत्र हिंदी में जमा कर सकता हूँ?",
-    answer: "Yes, absolutely. JIIR is an officially bilingual journal publishing papers in English and Hindi. Hindi manuscripts must include an English title, an abstract in English (150–250 words), and 4–6 English keywords to ensure indexing in international databases.",
+    question: "What language must submissions be written in?",
+    answer: "JIIR publishes scholarly research in English to ensure global indexing, international peer review, and worldwide citation impact across Crossref, Google Scholar, and international abstracting databases.",
   },
   {
     id: "f4",
     category: "Peer Review",
     question: "What peer-review model does JIIR employ?",
-    questionHi: "JIIR में किस प्रकार की सहकर्मी समीक्षा प्रणाली अपनाई जाती है?",
     answer: "We employ a strict Double-Blind Peer Review model. The identities of both the authors and the reviewers remain undisclosed to each other throughout the review cycle. Every paper is reviewed by at least two independent subject experts.",
   },
   {
     id: "f5",
     category: "Peer Review",
     question: "What is the typical time frame from submission to publication decision?",
-    questionHi: "जमा करने से लेकर प्रकाशन के निर्णय तक कितना समय लगता है?",
     answer: "Initial editorial screening is completed in 2 to 4 business days. The full peer-review process takes between 2 and 3 weeks. Fast-track reviews (for urgent research) can be completed in 7 to 10 days.",
   },
   {
     id: "f6",
     category: "Payments & APC",
     question: "When and how are Article Processing Charges (APC) paid?",
-    questionHi: "आर्टिकल प्रोसेसिंग शुल्क (APC) कब और कैसे दिया जाता है?",
     answer: "APC is only payable after your manuscript has received an unconditional acceptance decision from the Chief Editor. There are zero submission fees. Payment can be completed online via Razorpay (UPI, Credit/Debit cards, Net Banking) or through direct institutional bank transfer.",
   },
   {
     id: "f7",
     category: "Payments & APC",
     question: "Are fee waivers available for researchers?",
-    questionHi: "क्या शोधकर्ताओं के लिए शुल्क छूट की सुविधा है?",
     answer: "Yes. Waivers of up to 50% are available for deserving independent scholars, unfunded researchers, or researchers from low-income economies upon written request with supporting documentation.",
   },
   {
     id: "f8",
     category: "Post-Publication & Certificates",
     question: "How can authors verify and download their publication certificates?",
-    questionHi: "लेखक अपना प्रमाण पत्र कैसे सत्यापित और डाउनलोड कर सकते हैं?",
     answer: "Upon publication of the issue, each author and co-author can instantly download a high-resolution, digitally signed Certificate of Publication from their Scholar Portal. Each certificate contains an encrypted QR code linking to an official online verification page.",
   },
 ];
@@ -82,8 +73,7 @@ export default function FaqPage() {
     const matchCat = selectedCategory === "ALL" || f.category === selectedCategory;
     const matchSearch =
       f.question.toLowerCase().includes(search.toLowerCase()) ||
-      f.answer.toLowerCase().includes(search.toLowerCase()) ||
-      (f.questionHi && f.questionHi.includes(search));
+      f.answer.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
 
@@ -182,11 +172,6 @@ export default function FaqPage() {
                         {faq.question}
                       </h3>
                     </div>
-                    {faq.questionHi && (
-                      <p className="text-xs text-muted-foreground font-devanagari pl-0.5">
-                        {faq.questionHi}
-                      </p>
-                    )}
                   </div>
                   <div
                     className={`p-1.5 rounded-full bg-muted text-muted-foreground group-hover:text-foreground transition-transform duration-200 shrink-0 ${

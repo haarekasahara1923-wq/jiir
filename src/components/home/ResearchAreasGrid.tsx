@@ -147,11 +147,6 @@ export function ResearchAreasGrid({ areas }: ResearchAreasGridProps) {
                   <h3 className="text-base font-serif font-bold text-foreground group-hover:text-primary transition-colors">
                     {area.name}
                   </h3>
-                  {area.nameHi && (
-                    <p className="text-[11px] text-muted-foreground font-devanagari mt-0.5">
-                      {area.nameHi}
-                    </p>
-                  )}
                 </div>
 
                 {area.description && (

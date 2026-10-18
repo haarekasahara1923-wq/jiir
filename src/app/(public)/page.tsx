@@ -94,7 +94,7 @@ export default async function HomePage() {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-brand-green" />
-                  English & Hindi Publications
+                  International Indexing
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-brand-green" />

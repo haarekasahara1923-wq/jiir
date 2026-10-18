@@ -92,7 +92,7 @@ export default function AdminFaqsPage() {
             Frequently Asked Questions (FAQ) Manager
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Curate author, reviewer, and reader knowledge bases with English and Hindi support.
+            Curate author, reviewer, and reader knowledge bases across all journal disciplines.
           </p>
         </div>
 
