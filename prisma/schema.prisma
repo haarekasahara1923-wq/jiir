@@ -1,0 +1,810 @@
+// JIIR Journal Platform — Prisma Schema
+// Generated: Phase 1 Build
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  CHIEF_EDITOR
+  EDITOR
+  REVIEWER
+  SCHOLAR
+}
+
+enum AccountStatus {
+  ACTIVE
+  BLOCKED
+  PENDING_VERIFICATION
+}
+
+enum ManuscriptStatus {
+  SUBMITTED
+  INITIAL_EDITORIAL_CHECK
+  UNDER_PEER_REVIEW
+  REVISION_REQUIRED
+  REVISED_MANUSCRIPT_SUBMITTED
+  FINAL_EDITORIAL_DECISION
+  ACCEPTED
+  PUBLICATION_FEE_REQUIRED
+  PAYMENT_SUBMITTED
+  PAYMENT_VERIFIED
+  PRODUCTION
+  PROOFREADING
+  PUBLISHED
+  REJECTED
+  WITHDRAWN
+}
+
+enum PaymentStatus {
+  REQUIRED
+  INITIATED
+  SUBMITTED
+  VERIFIED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMode {
+  RAZORPAY
+  MANUAL
+}
+
+enum Currency {
+  INR
+  USD
+}
+
+enum ArticleType {
+  RESEARCH_ARTICLE
+  REVIEW_ARTICLE
+  CASE_STUDY
+  SHORT_COMMUNICATION
+}
+
+enum AuthorRegion {
+  INDIA
+  INTERNATIONAL
+}
+
+enum PublicationOption {
+  WITHOUT_DOI
+  WITH_DOI
+}
+
+enum IndexStatus {
+  PLANNED
+  APPLIED
+  UNDER_EVALUATION
+  INDEXED
+  NOT_APPLICABLE
+}
+
+enum ReviewRecommendation {
+  ACCEPT
+  MINOR_REVISION
+  MAJOR_REVISION
+  REJECT
+}
+
+enum IssueStatus {
+  FORTHCOMING
+  CURRENT
+  PUBLISHED
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  ARCHIVED
+}
+
+// ─────────────────────────────────────────────
+// CORE USER MODELS
+// ─────────────────────────────────────────────
+
+model User {
+  id              String         @id @default(cuid())
+  email           String         @unique
+  passwordHash    String
+  role            Role           @default(SCHOLAR)
+  status          AccountStatus  @default(PENDING_VERIFICATION)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  blockedReason   String?
+  profile         ScholarProfile?
+  manuscripts     Manuscript[]
+  notifications   Notification[]
+  reviews         Review[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([email])
+  @@index([role])
+  @@index([status])
+}
+
+model ScholarProfile {
+  id               String        @id @default(cuid())
+  userId           String        @unique
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName         String
+  photoUrl         String?
+  photoPublicId    String?
+  designation      String?
+  department       String?
+  institution      String?
+  address          String?
+  city             String?
+  state            String?
+  country          String
+  pincode          String?
+  contactNo        String?
+  whatsappNo       String?
+  linkedinUrl      String?
+  facebookUrl      String?
+  instagramUrl     String?
+  xUrl             String?
+  websiteUrl       String?
+  orcid            String?
+  googleScholarUrl String?
+  researchGateUrl  String?
+  bio              String?
+  achievements     Achievement[]
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model Achievement {
+  id          String         @id @default(cuid())
+  profileId   String
+  profile     ScholarProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  year        Int?
+  link        String?
+  sortOrder   Int            @default(0)
+}
+
+// ─────────────────────────────────────────────
+// MANUSCRIPT MODELS
+// ─────────────────────────────────────────────
+
+model Manuscript {
+  id                     String                    @id @default(cuid())
+  manuscriptCode         String                    @unique
+  scholarId              String
+  scholar                User                      @relation(fields: [scholarId], references: [id])
+  title                  String
+  articleType            ArticleType
+  subjectArea            String
+  abstract               String?
+  keywords               String[]
+  language               String                    @default("English")
+  pageCount              Int?
+  correspondingAuthor    String
+  correspondingEmail     String
+  phone                  String?
+  department             String?
+  institution            String?
+  affiliation            String?
+  country                String
+  authorRegion           AuthorRegion
+  publicationOption      PublicationOption
+  orcid                  String?
+  coAuthors              Json
+  status                 ManuscriptStatus          @default(SUBMITTED)
+  revisionRound          Int                       @default(0)
+  decisionNote           String?
+  decidedById            String?
+  decidedAt              DateTime?
+  declarationsAcceptedAt DateTime
+  files                  ManuscriptFile[]
+  history                ManuscriptStatusHistory[]
+  reviews                Review[]
+  payments               Payment[]
+  certificates           Certificate[]
+  article                Article?
+  assignedEditorId       String?
+  plagiarismScore        Float?
+  plagiarismReportUrl    String?
+  withdrawnReason        String?
+  internalNotes          String?
+  isDuplicateSuspected   Boolean                   @default(false)
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @updatedAt
+
+  @@index([status])
+  @@index([scholarId])
+  @@index([manuscriptCode])
+}
+
+model ManuscriptFile {
+  id           String     @id @default(cuid())
+  manuscriptId String
+  manuscript   Manuscript @relation(fields: [manuscriptId], references: [id], onDelete: Cascade)
+  kind         String // MANUSCRIPT | COVER_LETTER | REVISED | RESPONSE_TO_REVIEWERS | FINAL_PDF | PROOF | SUPPLEMENTARY | PAYMENT_RECEIPT | PLAGIARISM_REPORT
+  version      Int        @default(1)
+  assetId      String
+  asset        MediaAsset @relation(fields: [assetId], references: [id])
+  uploadedById String
+  note         String?
+  createdAt    DateTime   @default(now())
+
+  @@index([manuscriptId])
+}
+
+model ManuscriptStatusHistory {
+  id           String            @id @default(cuid())
+  manuscriptId String
+  manuscript   Manuscript        @relation(fields: [manuscriptId], references: [id], onDelete: Cascade)
+  fromStatus   ManuscriptStatus?
+  toStatus     ManuscriptStatus
+  message      String? // visible to scholar
+  internalNote String? // staff only
+  changedById  String?
+  createdAt    DateTime          @default(now())
+
+  @@index([manuscriptId])
+}
+
+model Review {
+  id               String                @id @default(cuid())
+  manuscriptId     String
+  manuscript       Manuscript            @relation(fields: [manuscriptId], references: [id], onDelete: Cascade)
+  reviewerId       String
+  reviewer         User                  @relation(fields: [reviewerId], references: [id])
+  round            Int                   @default(1)
+  invitedAt        DateTime              @default(now())
+  acceptedAt       DateTime?
+  declinedAt       DateTime?
+  dueAt            DateTime?
+  submittedAt      DateTime?
+  scores           Json? // {originality, methodology, clarity, significance, references}
+  commentsToAuthor String?
+  commentsToEditor String?
+  recommendation   ReviewRecommendation?
+  reminderSentAt   DateTime?
+
+  @@index([manuscriptId])
+  @@index([reviewerId])
+}
+
+// ─────────────────────────────────────────────
+// PAYMENT MODELS
+// ─────────────────────────────────────────────
+
+model Payment {
+  id                   String        @id @default(cuid())
+  manuscriptId         String
+  manuscript           Manuscript    @relation(fields: [manuscriptId], references: [id])
+  scholarId            String
+  amount               Decimal       @db.Decimal(12, 2)
+  currency             Currency
+  mode                 PaymentMode   @default(RAZORPAY)
+  status               PaymentStatus @default(REQUIRED)
+  razorpayOrderId      String?       @unique
+  razorpayPaymentId    String?       @unique
+  razorpaySignature    String?
+  razorpayMethod       String?
+  razorpayRaw          Json?
+  razorpayWebhookEvent String?
+  manualTxnId          String?
+  manualPaidOn         DateTime?
+  manualReceiptAssetId String?
+  feeBreakdown         Json? // {base, doi, gst, discount, waiver}
+  waiverReason         String?
+  invoiceNo            String?       @unique
+  verifiedById         String?
+  verifiedAt           DateTime?
+  failureReason        String?
+  refundedAmount       Decimal?      @db.Decimal(12, 2)
+  refundId             String?
+  refundReason         String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  @@index([manuscriptId])
+  @@index([scholarId])
+  @@index([status])
+}
+
+model FeePlan {
+  id               String       @id @default(cuid())
+  region           AuthorRegion
+  currency         Currency
+  withoutDoiAmount Decimal      @db.Decimal(12, 2)
+  withDoiAmount    Decimal      @db.Decimal(12, 2)
+  maxAuthors       Int
+  maxPagesWithDoi  Int?
+  extraPagePrice   Decimal?     @db.Decimal(12, 2)
+  gstPercent       Decimal?     @db.Decimal(5, 2)
+  isActive         Boolean      @default(true)
+  notes            String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+// ─────────────────────────────────────────────
+// CERTIFICATE MODELS
+// ─────────────────────────────────────────────
+
+model Certificate {
+  id             String      @id @default(cuid())
+  certificateNo  String      @unique
+  type           String // ACCEPTANCE | PUBLICATION | REVIEWER | EDITORIAL_MEMBER | PARTICIPATION
+  manuscriptId   String?
+  manuscript     Manuscript? @relation(fields: [manuscriptId], references: [id])
+  recipientName  String
+  recipientEmail String?
+  pdfAssetId     String?
+  verifyToken    String      @unique
+  issuedAt       DateTime    @default(now())
+  revokedAt      DateTime?
+  revokeReason   String?
+
+  @@index([verifyToken])
+}
+
+model CertificateTemplate {
+  id             String   @id @default(cuid())
+  type           String   @unique // ACCEPTANCE | PUBLICATION | REVIEWER | EDITORIAL_MEMBER | PARTICIPATION
+  signatoryName  String?
+  signatoryTitle String?
+  signatureUrl   String?
+  sealUrl        String?
+  heading        String?
+  bodyTemplate   String?
+  footerNote     String?
+  updatedAt      DateTime @updatedAt
+}
+
+// ─────────────────────────────────────────────
+// ISSUE AND ARTICLE MODELS
+// ─────────────────────────────────────────────
+
+model Issue {
+  id                  String      @id @default(cuid())
+  volume              Int
+  issueNo             Int
+  month               Int
+  year                Int
+  title               String?
+  status              IssueStatus @default(FORTHCOMING)
+  submissionDeadline  DateTime?
+  publishDate         DateTime?
+  scheduledPublishAt  DateTime?
+  coverAssetId        String?
+  fullIssuePdfAssetId String?
+  editorialNote       String?
+  articles            Article[]
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  @@unique([volume, issueNo])
+  @@index([status])
+}
+
+model Article {
+  id            String             @id @default(cuid())
+  slug          String             @unique
+  manuscriptId  String?            @unique
+  manuscript    Manuscript?        @relation(fields: [manuscriptId], references: [id])
+  issueId       String
+  issue         Issue              @relation(fields: [issueId], references: [id])
+  title         String
+  authors       Json // [{name, affiliation, email?, orcid?, order}]
+  abstract      String
+  keywords      String[]
+  researchArea  String
+  articleType   ArticleType
+  language      String             @default("English")
+  doi           String?
+  pageStart     Int?
+  pageEnd       Int?
+  pdfAssetId    String
+  receivedDate  DateTime?
+  acceptedDate  DateTime?
+  publishedDate DateTime
+  viewCount     Int                @default(0)
+  downloadCount Int                @default(0)
+  citationText  String?
+  isPublished   Boolean            @default(true)
+  sortOrder     Int                @default(0)
+  corrections   ArticleCorrection[]
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@index([researchArea])
+  @@index([issueId])
+  @@index([isPublished])
+}
+
+model ArticleCorrection {
+  id          String   @id @default(cuid())
+  articleId   String
+  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  type        String // CORRECTION | RETRACTION | EXPRESSION_OF_CONCERN
+  notice      String
+  publishedAt DateTime @default(now())
+}
+
+// ─────────────────────────────────────────────
+// EDITORIAL BOARD
+// ─────────────────────────────────────────────
+
+model EditorialMember {
+  id            String   @id @default(cuid())
+  group         String // EDITOR_IN_CHIEF | ADVISORY | MANAGING | ASSOCIATE | BOARD | INTERNATIONAL | REVIEWER_PANEL
+  name          String
+  designation   String?
+  department    String?
+  institution   String?
+  city          String?
+  country       String?
+  email         String?
+  showEmail     Boolean  @default(true)
+  orcid         String?
+  photoUrl      String?
+  bio           String?
+  profileLink   String?
+  expertiseTags String[]
+  sortOrder     Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([group])
+}
+
+// ─────────────────────────────────────────────
+// CONTENT MODELS (ALL DB-DRIVEN)
+// ─────────────────────────────────────────────
+
+model SiteSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model NavItem {
+  id           String   @id @default(cuid())
+  label        String
+  labelHi      String?
+  href         String?
+  parentId     String?
+  area         String // HEADER | FOR_AUTHORS | FOR_INSTITUTIONS | FOOTER_COL1 | FOOTER_COL2 | FOOTER_COL3 | FOOTER_POLICIES | FOOTER_CONTACT
+  sortOrder    Int      @default(0)
+  isVisible    Boolean  @default(true)
+  openInNewTab Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([area])
+  @@index([parentId])
+}
+
+model Page {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  titleHi        String?
+  subtitle       String?
+  subtitleHi     String?
+  blocks         Json
+  blocksHi       Json?
+  seoTitle       String?
+  seoDescription String?
+  ogImageUrl     String?
+  isPublished    Boolean  @default(true)
+  versionHistory Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ResearchArea {
+  id            String     @id @default(cuid())
+  name          String
+  nameHi        String?
+  icon          String?
+  description   String?
+  descriptionHi String?
+  sortOrder     Int        @default(0)
+  subtopics     Subtopic[]
+  createdAt     DateTime   @default(now())
+}
+
+model Subtopic {
+  id         String       @id @default(cuid())
+  areaId     String
+  area       ResearchArea @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  name       String
+  nameHi     String?
+  sortOrder  Int          @default(0)
+  showOnHome Boolean      @default(false)
+}
+
+model Faq {
+  id          String   @id @default(cuid())
+  category    String
+  question    String
+  questionHi  String?
+  answer      String
+  answerHi    String?
+  sortOrder   Int      @default(0)
+  showOnHome  Boolean  @default(false)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Announcement {
+  id        String    @id @default(cuid())
+  title     String
+  titleHi   String?
+  body      String?
+  bodyHi    String?
+  linkLabel String?
+  linkUrl   String?
+  startsAt  DateTime?
+  endsAt    DateTime?
+  isPinned  Boolean   @default(false)
+  isVisible Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model CallForPapers {
+  id         String    @id @default(cuid())
+  issueId    String?
+  title      String
+  titleHi    String?
+  body       String
+  bodyHi     String?
+  deadline   DateTime?
+  categories Json
+  themes     Json?
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model IndexingService {
+  id          String      @id @default(cuid())
+  name        String
+  category    String
+  description String?
+  website     String?
+  logoUrl     String?
+  status      IndexStatus @default(PLANNED)
+  verifiedOn  DateTime?
+  profileUrl  String?
+  sortOrder   Int         @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Resource {
+  id            String   @id @default(cuid())
+  title         String
+  description   String?
+  version       String?
+  category      String // TEMPLATE | GUIDELINES | CITATION | FORM | OTHER
+  assetId       String?
+  externalUrl   String?
+  sortOrder     Int      @default(0)
+  isVisible     Boolean  @default(true)
+  downloadCount Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Conference {
+  id               String                  @id @default(cuid())
+  title            String
+  slug             String                  @unique
+  description      String?
+  startDate        DateTime?
+  endDate          DateTime?
+  venue            String?
+  mode             String?
+  organiser        String?
+  bannerUrl        String?
+  sections         Json?
+  registrationOpen Boolean                @default(false)
+  registrationFee  Decimal?               @db.Decimal(12, 2)
+  currency         Currency?
+  isPublished      Boolean                @default(false)
+  registrations    ConferenceRegistration[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+}
+
+model ConferenceRegistration {
+  id           String     @id @default(cuid())
+  conferenceId String
+  conference   Conference @relation(fields: [conferenceId], references: [id])
+  name         String
+  email        String
+  phone        String?
+  institution  String?
+  paperTitle   String?
+  paymentId    String?
+  status       String     @default("NEW")
+  createdAt    DateTime   @default(now())
+
+  @@index([conferenceId])
+}
+
+model Enquiry {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  type        String
+  subject     String
+  message     String
+  topic       String?
+  status      EnquiryStatus @default(NEW)
+  reply       String?
+  repliedById String?
+  repliedAt   DateTime?
+  ip          String?
+  isSpam      Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+
+  @@index([status])
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String?
+  href      String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, readAt])
+}
+
+// ─────────────────────────────────────────────
+// MEDIA AND STORAGE
+// ─────────────────────────────────────────────
+
+model MediaAsset {
+  id           String           @id @default(cuid())
+  publicId     String           @unique
+  url          String
+  secureUrl    String?
+  resourceType String
+  deliveryType String           @default("upload")
+  format       String?
+  bytes        BigInt?
+  originalName String?
+  folder       String?
+  uploadedById String?
+  files        ManuscriptFile[]
+  createdAt    DateTime         @default(now())
+
+  @@index([folder])
+  @@index([uploadedById])
+}
+
+// ─────────────────────────────────────────────
+// AUDIT, LOGGING, SYSTEM
+// ─────────────────────────────────────────────
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String
+  entity    String
+  entityId  String?
+  before    Json?
+  after     Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([actorId])
+  @@index([createdAt])
+}
+
+model EmailLog {
+  id        String   @id @default(cuid())
+  to        String
+  subject   String
+  template  String
+  status    String
+  error     String?
+  retries   Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
+
+model EmailToken {
+  id        String    @id @default(cuid())
+  userId    String
+  type      String
+  tokenHash String
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  @@index([tokenHash])
+  @@index([userId, type])
+}
+
+model EmailTemplate {
+  id       String   @id @default(cuid())
+  key      String   @unique
+  subject  String
+  htmlBody String
+  textBody String?
+  updatedAt DateTime @updatedAt
+}
+
+model Counter {
+  key   String @id
+  value Int
+}
+
+model BackgroundJob {
+  id          String    @id @default(cuid())
+  type        String
+  payload     Json
+  status      String    @default("PENDING")
+  attempts    Int       @default(0)
+  error       String?
+  scheduledAt DateTime?
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([status, scheduledAt])
+}
+
+model RazorpayWebhookLog {
+  id        String   @id @default(cuid())
+  eventId   String   @unique
+  event     String
+  payload   Json
+  sigValid  Boolean
+  processed Boolean  @default(false)
+  error     String?
+  createdAt DateTime @default(now())
+}
+
+model HomeSection {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  isVisible Boolean  @default(true)
+  sortOrder Int      @default(0)
+  config    Json?
+  updatedAt DateTime @updatedAt
+}
+
+model CaptchaToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  question  String
+  answer    Int
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  @@index([token])
+}
