@@ -1,49 +1,17 @@
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
-import type { NextRequest } from "next/server";
 
-const PUBLIC_PATHS = [
-  "/",
-  "/about",
-  "/contact",
-  "/current-issue",
-  "/past-issues",
-  "/articles",
-  "/call-for-papers",
-  "/faq",
-  "/editorial-board",
-  "/conferences",
-  "/indexing",
-  "/doi",
-  "/author-guidelines",
-  "/author-resources",
-  "/article-processing-charges",
-  "/publication-ethics",
-  "/peer-review-policy",
-  "/publication-procedure",
-  "/submit-manuscript",
-  "/track-manuscript",
-  "/pay-online",
-  "/journal-information",
-  "/institutional-membership",
-  "/research-collaboration",
-  "/conference-collaboration",
-  "/institutional-services",
-  "/privacy",
-  "/terms",
-  "/copyright",
-  "/refund-policy",
-  "/certificate-verify",
-];
+const { auth } = NextAuth(authConfig);
 
 const AUTH_PATHS = ["/login", "/register", "/forgot-password", "/reset-password", "/verify-email"];
 
-export async function middleware(request: NextRequest) {
+export default auth((request) => {
   const { pathname } = request.nextUrl;
+  const session = request.auth;
 
   // Auth routes
   if (AUTH_PATHS.some((p) => pathname.startsWith(p))) {
-    const session = await auth();
     if (session?.user) {
       // Redirect logged-in users away from auth pages
       const role = session.user.role;
@@ -60,7 +28,6 @@ export async function middleware(request: NextRequest) {
 
   // Admin routes
   if (pathname.startsWith("/admin")) {
-    const session = await auth();
     if (!session?.user) {
       return NextResponse.redirect(
         new URL(`/login?callbackUrl=${encodeURIComponent(pathname)}`, request.url)
@@ -79,7 +46,6 @@ export async function middleware(request: NextRequest) {
 
   // Scholar routes
   if (pathname.startsWith("/scholar")) {
-    const session = await auth();
     if (!session?.user) {
       return NextResponse.redirect(
         new URL(`/login?callbackUrl=${encodeURIComponent(pathname)}`, request.url)
@@ -97,7 +63,6 @@ export async function middleware(request: NextRequest) {
 
   // Reviewer routes
   if (pathname.startsWith("/reviewer")) {
-    const session = await auth();
     if (!session?.user) {
       return NextResponse.redirect(
         new URL(`/login?callbackUrl=${encodeURIComponent(pathname)}`, request.url)
@@ -113,7 +78,7 @@ export async function middleware(request: NextRequest) {
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
   matcher: [
