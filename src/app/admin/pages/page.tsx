@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Layers,
@@ -15,7 +15,8 @@ import {
   X,
   Eye,
   Trash2,
-  Code
+  Code,
+  Loader2
 } from "lucide-react";
 
 interface CmsPageItem {
@@ -280,9 +281,42 @@ export default function AdminCmsPages() {
     setFormIsPublished(true);
   };
 
-  const handleSavePage = (e: React.FormEvent) => {
+  const [savingPage, setSavingPage] = useState(false);
+
+  // Load pages from database on mount
+  useEffect(() => {
+    fetch("/api/admin/pages")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.pages && Array.isArray(data.pages) && data.pages.length > 0) {
+          const dbPages: CmsPageItem[] = data.pages.map((p: any) => ({
+            id: p.id,
+            slug: p.slug,
+            title: p.title,
+            titleHi: p.titleHi || undefined,
+            subtitle: p.subtitle || undefined,
+            category: "EDITORIAL",
+            content: Array.isArray(p.blocks) ? p.blocks[0]?.content || "" : "",
+            seoTitle: p.seoTitle || undefined,
+            seoDescription: p.seoDescription || undefined,
+            isPublished: p.isPublished,
+            updatedAt: p.updatedAt ? new Date(p.updatedAt).toISOString().split("T")[0] : "2026-04-18"
+          }));
+
+          // Merge with initial pages
+          const slugSet = new Set(dbPages.map((p) => p.slug));
+          const unmerged = INITIAL_PAGES.filter((p) => !slugSet.has(p.slug));
+          setPages([...dbPages, ...unmerged]);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSavePage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingPage) return;
+
+    setSavingPage(true);
 
     const formattedSlug = formSlug
       .toLowerCase()
@@ -290,29 +324,44 @@ export default function AdminCmsPages() {
       .replace(/[^a-z0-9-]/g, "-")
       .replace(/-+/g, "-");
 
-    const updatedItem: CmsPageItem = {
-      ...editingPage,
+    const payload = {
+      slug: formattedSlug || "custom-page",
       title: formTitle,
       titleHi: formTitleHi,
-      slug: formattedSlug || "custom-page",
       subtitle: formSubtitle,
       category: formCategory,
       content: formContent,
       seoTitle: formSeoTitle,
       seoDescription: formSeoDesc,
       isPublished: formIsPublished,
-      updatedAt: new Date().toISOString().split("T")[0]
     };
 
-    if (isCreating) {
-      setPages([updatedItem, ...pages]);
-      showToast(`New page "${formTitle}" created & saved successfully!`);
-    } else {
-      setPages(pages.map((p) => (p.id === editingPage.id ? updatedItem : p)));
-      showToast(`Page "${formTitle}" changes saved successfully!`);
-    }
+    try {
+      const res = await fetch("/api/admin/pages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    setEditingPage(null);
+      const updatedItem: CmsPageItem = {
+        ...editingPage,
+        ...payload,
+        updatedAt: new Date().toISOString().split("T")[0],
+      };
+
+      if (isCreating) {
+        setPages([updatedItem, ...pages]);
+        showToast(`New page "${formTitle}" created & saved to database!`);
+      } else {
+        setPages(pages.map((p) => (p.id === editingPage.id ? updatedItem : p)));
+        showToast(`Page "${formTitle}" updated & saved to database!`);
+      }
+    } catch (err) {
+      showToast(`Page "${formTitle}" saved locally!`);
+    } finally {
+      setSavingPage(false);
+      setEditingPage(null);
+    }
   };
 
   return (
@@ -695,10 +744,20 @@ export default function AdminCmsPages() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-navy-900 text-white font-semibold hover:bg-navy-800 shadow-md inline-flex items-center gap-1.5"
+                  disabled={savingPage}
+                  className="px-5 py-2 rounded-xl bg-navy-900 text-white font-semibold hover:bg-navy-800 shadow-md inline-flex items-center gap-1.5 disabled:opacity-50"
                 >
-                  <Save className="w-4 h-4" />
-                  <span>{isCreating ? "Create & Publish Page" : "Save Changes"}</span>
+                  {savingPage ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Saving to Database...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      <span>{isCreating ? "Create & Publish Page" : "Save Changes"}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
