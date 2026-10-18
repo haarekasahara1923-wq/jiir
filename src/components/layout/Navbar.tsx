@@ -42,8 +42,11 @@ export function Navbar({ settings, navItems }: NavbarProps) {
 
   // Close menus on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
+    const timer = setTimeout(() => {
+      setMobileMenuOpen(false);
+      setActiveDropdown(null);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   const user = session?.user;
