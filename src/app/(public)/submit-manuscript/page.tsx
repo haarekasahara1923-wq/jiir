@@ -64,8 +64,8 @@ export default function SubmitManuscriptLandingPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
               {/* Card Header */}
-              <div className="px-6 py-4 border-b border-slate-200 flex items-center gap-3 bg-slate-50">
-                <div className="w-9 h-9 rounded-lg bg-brand-orange/10 border border-brand-orange/20 flex items-center justify-center">
+              <div className="px-4 sm:px-6 py-4 border-b border-slate-200 flex items-center gap-3 bg-slate-50 text-left">
+                <div className="w-9 h-9 rounded-lg bg-brand-orange/10 border border-brand-orange/20 flex items-center justify-center shrink-0">
                   <FileText className="w-5 h-5 text-brand-orange" />
                 </div>
                 <div>
@@ -74,7 +74,7 @@ export default function SubmitManuscriptLandingPage() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8">
+              <div className="p-4 sm:p-8 text-left">
                 <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                   Please verify that your submission dossier includes all the required components
                   prior to launching the submission wizard:
@@ -115,7 +115,7 @@ export default function SubmitManuscriptLandingPage() {
               {/* Gradient accent top */}
               <div className="h-1 bg-gradient-to-r from-[#1F3C88] via-[#C2185B] to-[#F57C00]" />
 
-              <div className="p-6 sm:p-8 space-y-6 text-center">
+              <div className="p-4 sm:p-8 space-y-6 text-center">
                 <div className="w-16 h-16 rounded-2xl bg-brand-orange/15 border border-brand-orange/30 text-brand-orange flex items-center justify-center mx-auto">
                   <Upload className="w-8 h-8" />
                 </div>

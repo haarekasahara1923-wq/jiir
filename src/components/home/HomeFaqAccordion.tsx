@@ -53,7 +53,7 @@ export function HomeFaqAccordion({ faqs }: { faqs?: FaqItem[] }) {
   };
 
   return (
-    <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10 shadow-sm space-y-6">
+    <section className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-8 lg:p-10 shadow-sm space-y-6 text-left">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-brand-orange">

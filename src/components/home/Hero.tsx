@@ -67,10 +67,10 @@ export function Hero({ settings }: HeroProps) {
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <Link
                 href="/submit-manuscript"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-navy-800 via-navy-900 to-slate-900 hover:from-navy-900 hover:to-black shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-navy-800 via-navy-900 to-slate-900 hover:from-navy-900 hover:to-black shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 w-full sm:w-auto text-center"
               >
                 <Upload className="w-4 h-4 text-brand-orange" />
                 <span>Submit Your Manuscript</span>
@@ -78,7 +78,7 @@ export function Hero({ settings }: HeroProps) {
 
               <Link
                 href="/track-manuscript"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-900 bg-white border border-slate-300 hover:bg-slate-50 shadow-sm hover:shadow transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-900 bg-white border border-slate-300 hover:bg-slate-50 shadow-sm hover:shadow transition-all duration-200 w-full sm:w-auto text-center"
               >
                 <SearchCheck className="w-4 h-4 text-navy-800" />
                 <span>Track Manuscript Status</span>
@@ -86,7 +86,7 @@ export function Hero({ settings }: HeroProps) {
 
               <Link
                 href="/author-resources"
-                className="text-xs sm:text-sm font-semibold text-navy-800 hover:text-brand-orange transition-colors inline-flex items-center gap-1 ml-1"
+                className="text-xs sm:text-sm font-semibold text-navy-800 hover:text-brand-orange transition-colors inline-flex items-center justify-center sm:justify-start gap-1 py-1 sm:ml-1"
               >
                 <span>Download Paper Template</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -96,10 +96,10 @@ export function Hero({ settings }: HeroProps) {
           </div>
 
           {/* RIGHT COLUMN: Official Visual Showcase / Clean Natural Frame without artificial shades (5 cols) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-md lg:max-w-none">
+          <div className="lg:col-span-5 flex justify-start lg:justify-end w-full">
+            <div className="w-full">
               {/* Clean, perfectly integrated poster container without awkward blur halos or heavy gradients */}
-              <div className="rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-md">
+              <div className="rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-md w-full">
                 <img
                   src="/images/jiir-global-impact-poster.jpg"
                   alt="JIIR - Turn Your Research Into Global Impact"

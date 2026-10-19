@@ -21,7 +21,7 @@ const defaultPartners: IndexingItem[] = [
 
 export function IndexingBanner() {
   return (
-    <section className="bg-gradient-to-br from-navy-900 to-navy-950 text-white rounded-2xl p-6 sm:p-8 lg:p-10 border border-navy-700 space-y-6">
+    <section className="bg-gradient-to-br from-navy-900 to-navy-950 text-white rounded-2xl p-4 sm:p-8 lg:p-10 border border-navy-700 space-y-6 text-left">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2">

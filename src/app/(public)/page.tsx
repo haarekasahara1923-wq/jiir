@@ -68,7 +68,7 @@ export default async function HomePage() {
 
       {/* 3. About JIIR Summary & Aims */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10 shadow-sm">
+        <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-8 lg:p-10 shadow-sm text-left">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-orange">

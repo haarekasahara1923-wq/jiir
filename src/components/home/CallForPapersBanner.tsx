@@ -43,7 +43,7 @@ export function CallForPapersBanner({
   }, [deadline]);
 
   return (
-    <section className="bg-gradient-to-br from-navy-950 via-[#071746] to-slate-950 text-white rounded-3xl shadow-2xl overflow-hidden border border-navy-800 p-6 sm:p-8 lg:p-10 relative">
+    <section className="bg-gradient-to-br from-navy-950 via-[#071746] to-slate-950 text-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-navy-800 p-4 sm:p-8 lg:p-10 relative text-left">
       {/* Decorative background glow */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -51,11 +51,11 @@ export function CallForPapersBanner({
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         {/* LEFT COLUMN: Official Call for Papers Poster (5 cols) */}
-        <div className="lg:col-span-5 flex justify-center">
-          <div className="relative group w-full max-w-md lg:max-w-none">
+        <div className="lg:col-span-5 w-full">
+          <div className="relative group w-full">
             <div className="absolute -inset-1 bg-gradient-to-r from-brand-orange via-amber-400 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-300" />
             
-            <div className="relative rounded-2xl overflow-hidden border-2 border-navy-700 bg-navy-900 shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-navy-700 bg-navy-900 shadow-2xl w-full">
               <img
                 src="/images/jiir-call-for-papers-poster.jpg"
                 alt="JIIR Call for Papers - Discoverability in Leading Databases"

@@ -62,10 +62,10 @@ export default function PayOnlinePage() {
         </p>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="w-full max-w-3xl mx-auto space-y-8">
         {/* Step 1: Lookup Manuscript */}
         {!orderData ? (
-          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm space-y-6">
+          <div className="p-4 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm space-y-6 text-left">
             <h2 className="text-base font-serif font-bold text-foreground border-b border-border pb-2">
               Step 1: Enter Manuscript Identification
             </h2>
@@ -114,7 +114,7 @@ export default function PayOnlinePage() {
           </div>
         ) : (
           /* Step 2: Payment Options */
-          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm space-y-6 animate-in fade-in">
+          <div className="p-4 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm space-y-6 animate-in fade-in text-left">
             <div className="border-b border-border pb-4 flex items-center justify-between">
               <div>
                 <span className="text-xs font-mono font-bold text-primary">{orderData.trackingId}</span>

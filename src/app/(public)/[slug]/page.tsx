@@ -232,8 +232,8 @@ export default async function DynamicPublicPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
-      <div className="max-w-5xl xl:max-w-6xl mx-auto space-y-8">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14">
+      <div className="w-full max-w-5xl xl:max-w-6xl mx-auto space-y-6 sm:space-y-8">
         {/* Page Header */}
         <div className="border-b border-border pb-6 space-y-2 text-left">
           <div className="flex items-center gap-2">
@@ -252,7 +252,7 @@ export default async function DynamicPublicPage({ params }: PageProps) {
         </div>
 
         {/* Page Blocks */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 sm:p-10 shadow-sm text-left">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-4 sm:p-8 lg:p-10 shadow-sm text-left">
           <BlockRenderer blocks={page.blocks} />
         </div>
       </div>

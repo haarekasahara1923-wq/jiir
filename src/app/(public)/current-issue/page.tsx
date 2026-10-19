@@ -34,7 +34,7 @@ export default async function CurrentIssuePage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-10">
       {/* Issue Hero Banner */}
-      <div className="bg-gradient-to-br from-navy-900 via-navy-950 to-slate-950 text-white rounded-2xl p-6 sm:p-10 border border-navy-800 shadow-xl space-y-6">
+      <div className="bg-gradient-to-br from-navy-900 via-navy-950 to-slate-950 text-white rounded-2xl p-4 sm:p-10 border border-navy-800 shadow-xl space-y-6 text-left">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-navy-800/80 pb-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">

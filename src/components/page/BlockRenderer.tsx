@@ -77,7 +77,7 @@ export function BlockRenderer({ blocks }: { blocks: PageBlock[] | unknown }) {
             return (
               <div
                 key={index}
-                className="text-sm sm:text-base text-foreground/90 leading-relaxed space-y-4"
+                className="text-sm sm:text-base text-foreground/90 leading-relaxed space-y-4 text-left"
                 dangerouslySetInnerHTML={{ __html: cleanHtml }}
               />
             );
@@ -99,7 +99,7 @@ export function BlockRenderer({ blocks }: { blocks: PageBlock[] | unknown }) {
             }[block.variant || "info"];
 
             return (
-              <div key={index} className={`p-4 sm:p-5 rounded-xl border flex items-start gap-3 text-xs sm:text-sm ${variants}`}>
+              <div key={index} className={`p-4 sm:p-5 rounded-xl border flex items-start gap-3 text-xs sm:text-sm text-left ${variants}`}>
                 <Icon className="w-5 h-5 shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   {block.title && <h4 className="font-bold">{block.title}</h4>}

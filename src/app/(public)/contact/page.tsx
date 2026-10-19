@@ -63,7 +63,7 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* Contact Info (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm space-y-5">
+          <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm space-y-5 text-left">
             <h2 className="text-lg font-serif font-bold text-foreground border-b border-border pb-2">
               Secretariat Desks
             </h2>
@@ -131,7 +131,7 @@ export default function ContactPage() {
 
         {/* Form (7 cols) */}
         <div className="lg:col-span-7">
-          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm">
+          <div className="p-4 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm text-left">
             {submitted ? (
               <div className="py-12 text-center space-y-4 animate-in fade-in">
                 <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">

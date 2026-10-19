@@ -143,7 +143,7 @@ export default async function EditorialBoardPage() {
                 {catMembers.map((member) => (
                   <div
                     key={member.id}
-                    className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border hover:border-navy-300 dark:hover:border-navy-700 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+                    className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border hover:border-navy-300 dark:hover:border-navy-700 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4 text-left"
                   >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-3">

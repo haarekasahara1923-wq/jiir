@@ -133,7 +133,7 @@ export default async function IndexingPage() {
         {displayServices.map((srv) => (
           <div
             key={srv.id}
-            className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+            className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4 text-left"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">

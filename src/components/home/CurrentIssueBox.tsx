@@ -33,7 +33,7 @@ export function CurrentIssueBox({ currentIssue }: CurrentIssueBoxProps) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 lg:p-8">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8 text-left">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">

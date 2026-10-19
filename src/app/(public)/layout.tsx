@@ -12,7 +12,7 @@ export default async function PublicLayout({
   const navItems = await getHeaderNavigation();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-navy-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-navy-600 selection:text-white w-full overflow-x-clip">
       {/* Navbar now includes AnnouncementTicker internally in single sticky wrapper */}
       <Navbar settings={settings} navItems={navItems} />
       <main className="flex-1 w-full pb-20 lg:pb-0" id="main-content">{children}</main>

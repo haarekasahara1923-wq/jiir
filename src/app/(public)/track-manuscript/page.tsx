@@ -67,8 +67,8 @@ export default function TrackManuscriptPage() {
       </div>
 
       {/* Tracker Card */}
-      <div className="max-w-2xl mx-auto">
-        <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm">
+      <div className="w-full max-w-2xl mx-auto">
+        <div className="p-4 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm text-left">
           <form onSubmit={handleTrack} className="space-y-4">
             <div className="space-y-1">
               <label className="text-xs font-semibold text-foreground">Manuscript Tracking ID *</label>
@@ -114,7 +114,7 @@ export default function TrackManuscriptPage() {
 
         {/* Results Display */}
         {result && (
-          <div className="mt-8 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-md space-y-6 animate-in fade-in">
+          <div className="mt-8 p-4 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-md space-y-6 text-left animate-in fade-in">
             <div className="border-b border-border pb-4 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-navy-100 dark:bg-navy-950 text-navy-800 dark:text-navy-300">

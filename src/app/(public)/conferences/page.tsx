@@ -91,7 +91,7 @@ export default async function ConferencesPage() {
         {display.map((conf) => (
           <div
             key={conf.id}
-            className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm hover:shadow-md transition-all space-y-4"
+            className="p-4 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-border shadow-sm hover:shadow-md transition-all space-y-4 text-left"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border pb-4">
               <div className="flex items-center gap-2">

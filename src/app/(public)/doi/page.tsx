@@ -22,7 +22,7 @@ export default function DoiPage() {
       </div>
 
       {/* Honest Status Callout */}
-      <div className="p-6 rounded-2xl bg-navy-50/80 dark:bg-navy-950/40 border border-navy-200 dark:border-navy-900 flex items-start gap-4">
+      <div className="p-4 sm:p-6 rounded-2xl bg-navy-50/80 dark:bg-navy-950/40 border border-navy-200 dark:border-navy-900 flex items-start gap-4 text-left">
         <ShieldAlert className="w-6 h-6 text-brand-orange shrink-0 mt-0.5" />
         <div className="space-y-2 text-xs text-navy-900 dark:text-navy-200">
           <h2 className="text-base font-bold font-serif">
@@ -42,7 +42,7 @@ export default function DoiPage() {
 
       {/* What is a DOI */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border space-y-4 shadow-sm">
+        <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-border space-y-4 shadow-sm text-left">
           <h3 className="text-lg font-serif font-bold text-foreground">
             What is a Digital Object Identifier (DOI)?
           </h3>

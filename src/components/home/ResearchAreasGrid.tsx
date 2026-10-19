@@ -131,7 +131,7 @@ export function ResearchAreasGrid({ areas }: ResearchAreasGridProps) {
           return (
             <div
               key={area.id}
-              className="group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+              className="group bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-left"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">

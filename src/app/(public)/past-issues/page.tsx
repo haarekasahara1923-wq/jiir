@@ -53,7 +53,7 @@ export default async function PastIssuesPage() {
         {displayIssues.map((iss) => (
           <div
             key={iss.id}
-            className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4"
+            className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4 text-left"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
