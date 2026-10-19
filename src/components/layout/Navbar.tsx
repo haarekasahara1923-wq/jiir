@@ -83,12 +83,45 @@ export function Navbar({ settings, navItems }: NavbarProps) {
   return (
     <>
       {/* ─────────────────────────────────────────────
+          STICKY WRAPPER: AnnouncementTicker + Header in ONE sticky container
+          Prevents overlap between ticker and navbar on desktop
+         ───────────────────────────────────────────── */}
+      <div
+        className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+          scrolled ? "shadow-md" : ""
+        }`}
+      >
+        {/* Announcement Ticker — lives inside the sticky wrapper */}
+        <div className="bg-navy-950 text-navy-100 py-1.5 border-b border-navy-800">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 overflow-hidden flex-1">
+              <span className="inline-flex items-center gap-1 font-bold text-brand-orange uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-brand-orange/15 shrink-0 whitespace-nowrap">
+                📢 Announcement
+              </span>
+              <span className="truncate text-slate-300 text-xs font-medium">
+                Call for Papers 2026: Submissions open — Vol. 1, Issue 1 · Multidisciplinary Innovations.
+              </span>
+            </div>
+            <div className="hidden md:flex items-center gap-4 shrink-0 text-slate-400 text-xs">
+              {settings.issnOnline && (
+                <span>
+                  <strong className="text-white">ISSN (Online):</strong>{" "}{settings.issnOnline}
+                </span>
+              )}
+              {settings.contactEmail && (
+                <a href={`mailto:${settings.contactEmail}`} className="hover:text-white transition-colors">
+                  {settings.contactEmail}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+      {/* ─────────────────────────────────────────────
           1. Top App Bar (Header) - Pure Light Theme
          ───────────────────────────────────────────── */}
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-200 bg-white/98 backdrop-blur-md border-b border-slate-200 ${
-          scrolled ? "shadow-sm" : ""
-        }`}
+        className="w-full bg-white/98 backdrop-blur-md border-b border-slate-200"
       >
         <div className="container mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
@@ -106,7 +139,7 @@ export function Navbar({ settings, navItems }: NavbarProps) {
               <Logo logoUrl={settings.logoUrl} size="md" />
             </div>
 
-            {/* Desktop Navigation Links (Font 14px) */}
+            {/* Desktop Navigation Links — 15px for academic readability */}
             <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               {navItems.map((item) => {
                 const hasChildren = item.children && item.children.length > 0;
@@ -124,7 +157,7 @@ export function Navbar({ settings, navItems }: NavbarProps) {
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
                       <button
-                        className={`flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                        className={`flex items-center gap-1.5 px-3.5 py-2 text-[15px] font-semibold rounded-lg transition-colors ${
                           isActive
                             ? "text-navy-700 bg-navy-50 font-bold"
                             : "text-slate-700 hover:text-navy-900 hover:bg-slate-100"
@@ -149,7 +182,7 @@ export function Navbar({ settings, navItems }: NavbarProps) {
                               key={child.id}
                               href={child.href}
                               target={child.target}
-                              className={`block px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                              className={`block px-3.5 py-2.5 text-sm font-medium rounded-lg transition-colors ${
                                 pathname === child.href
                                   ? "bg-navy-50 text-navy-700 font-bold"
                                   : "text-slate-700 hover:bg-slate-50 hover:text-navy-900"
@@ -169,7 +202,7 @@ export function Navbar({ settings, navItems }: NavbarProps) {
                     key={item.id}
                     href={item.href}
                     target={item.target}
-                    className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                    className={`px-3.5 py-2 text-[15px] font-semibold rounded-lg transition-colors ${
                       isActive
                         ? "text-navy-700 bg-navy-50 font-bold"
                         : "text-slate-700 hover:text-navy-900 hover:bg-slate-100"
@@ -302,6 +335,7 @@ export function Navbar({ settings, navItems }: NavbarProps) {
         {/* 4-Color Brand Accent Strip */}
         <div className="brand-gradient-line" />
       </header>
+      </div>
 
       {/* ─────────────────────────────────────────────
           2. Android Mobile Slide-Over Navigation Drawer (Pure Light Theme)
