@@ -2,6 +2,9 @@
 
 @import "tailwindcss";
 
+/* Enforce class-only dark mode so mobile devices with OS dark mode don't darken page elements */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ─────────────────────────────────────────────
    Tailwind v4 Theme — Custom Tokens (JIIR Brand Identity)
    ───────────────────────────────────────────── */

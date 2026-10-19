@@ -108,19 +108,19 @@ export function ResearchAreasGrid({ areas }: ResearchAreasGridProps) {
           <span className="text-xs font-bold uppercase tracking-wider text-brand-orange">
             Interdisciplinary Scope
           </span>
-          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-navy-900 dark:text-white mt-1">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mt-1">
             Explore Core Research Domains
           </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-xl font-medium">
             JIIR invites cross-pollinated scholarship connecting these 5 primary pillars of contemporary research.
           </p>
         </div>
 
         <Link
           href="/research-areas"
-          className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1 group"
+          className="text-xs font-bold text-navy-800 hover:text-brand-orange inline-flex items-center gap-1 group"
         >
-          <span>Explore All Subtopics & Classifications</span>
+          <span>Explore All Subtopics &amp; Classifications</span>
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
@@ -131,39 +131,39 @@ export function ResearchAreasGrid({ areas }: ResearchAreasGridProps) {
           return (
             <div
               key={area.id}
-              className="group bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+              className="group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-xl bg-navy-50 dark:bg-navy-950 text-navy-700 dark:text-navy-300 flex items-center justify-center group-hover:bg-navy-700 group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 text-navy-800 flex items-center justify-center group-hover:bg-navy-800 group-hover:text-white transition-colors">
                     <IconComponent className="w-6 h-6" />
                   </div>
-                  <span className="text-[10px] font-bold text-muted-foreground tracking-wider uppercase">
+                  <span className="text-[10px] font-bold text-slate-500 tracking-wider uppercase">
                     0{idx + 1}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-serif font-bold text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="text-base font-serif font-bold text-slate-900 group-hover:text-navy-800 transition-colors">
                     {area.name}
                   </h3>
                 </div>
 
                 {area.description && (
-                  <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-700 line-clamp-2 leading-relaxed font-normal">
                     {area.description}
                   </p>
                 )}
 
                 {/* Subtopic badges / list */}
                 {area.subtopics && area.subtopics.length > 0 && (
-                  <div className="pt-2 border-t border-border/60">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
+                  <div className="pt-2 border-t border-slate-100">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
                       Featured Sub-disciplines:
                     </p>
                     <ul className="space-y-1.5 text-xs">
                       {area.subtopics.slice(0, 5).map((sub) => (
-                        <li key={sub.id} className="flex items-center gap-1.5 text-muted-foreground">
+                        <li key={sub.id} className="flex items-center gap-1.5 text-slate-800 font-medium">
                           <ChevronRight className="w-3 h-3 text-brand-orange shrink-0" />
                           <span className="truncate">{sub.name}</span>
                         </li>
@@ -173,10 +173,10 @@ export function ResearchAreasGrid({ areas }: ResearchAreasGridProps) {
                 )}
               </div>
 
-              <div className="pt-4 mt-4 border-t border-border/40">
+              <div className="pt-4 mt-4 border-t border-slate-100">
                 <Link
                   href={`/submit-manuscript?area=${area.slug}`}
-                  className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                  className="text-xs font-bold text-navy-800 hover:text-brand-orange inline-flex items-center gap-1"
                 >
                   <span>Submit paper in this discipline</span>
                   <ArrowRight className="w-3 h-3" />

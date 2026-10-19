@@ -53,30 +53,30 @@ export function HomeFaqAccordion({ faqs }: { faqs?: FaqItem[] }) {
   };
 
   return (
-    <section className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 sm:p-8 lg:p-10 shadow-sm space-y-6">
+    <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10 shadow-sm space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-brand-orange">
             Author Help Center
           </span>
-          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-navy-900 dark:text-white mt-1">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mt-1">
             Frequently Asked Questions
           </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-xl font-medium">
             Quick answers to common questions about peer review, bilingual guidelines, and publication workflow.
           </p>
         </div>
 
         <Link
           href="/faq"
-          className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1 group shrink-0"
+          className="text-xs font-bold text-navy-800 hover:text-brand-orange inline-flex items-center gap-1 group shrink-0"
         >
           <span>View All 16+ FAQs</span>
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
 
-      <div className="divide-y divide-border">
+      <div className="divide-y divide-slate-200">
         {displayFaqs.map((faq) => {
           const isOpen = openId === faq.id;
           return (
@@ -88,17 +88,17 @@ export function HomeFaqAccordion({ faqs }: { faqs?: FaqItem[] }) {
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-muted text-muted-foreground">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700">
                       {faq.category}
                     </span>
-                    <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-navy-800 transition-colors">
                       {faq.question}
                     </h3>
                   </div>
                 </div>
                 <div
-                  className={`p-1.5 rounded-full bg-muted text-muted-foreground group-hover:text-foreground transition-transform duration-200 shrink-0 ${
-                    isOpen ? "rotate-180 bg-navy-100 text-navy-800 dark:bg-navy-900" : ""
+                  className={`p-1.5 rounded-full bg-slate-100 text-slate-700 group-hover:text-slate-900 transition-transform duration-200 shrink-0 ${
+                    isOpen ? "rotate-180 bg-navy-100 text-navy-900" : ""
                   }`}
                 >
                   <ChevronDown className="w-4 h-4" />
@@ -106,7 +106,7 @@ export function HomeFaqAccordion({ faqs }: { faqs?: FaqItem[] }) {
               </button>
 
               {isOpen && (
-                <div className="pt-3 pl-1 pr-6 text-xs sm:text-sm text-muted-foreground leading-relaxed animate-in fade-in duration-150">
+                <div className="pt-3 pl-1 pr-6 text-xs sm:text-sm text-slate-800 leading-relaxed font-normal animate-in fade-in duration-150">
                   <p>{faq.answer}</p>
                 </div>
               )}

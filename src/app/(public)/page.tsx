@@ -68,59 +68,59 @@ export default async function HomePage() {
 
       {/* 3. About JIIR Summary & Aims */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 sm:p-8 lg:p-10 shadow-sm">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10 shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-orange">
-                Aims & Scholarly Scope
+                Aims &amp; Scholarly Scope
               </span>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-navy-900 dark:text-white">
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
                 Fostering Rigorous Cross-Disciplinary Discourse
               </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                The <strong>Journal of Interdisciplinary Innovation & Research (JIIR)</strong> is dedicated to
+              <p className="text-sm text-slate-800 leading-relaxed font-normal">
+                The <strong>Journal of Interdisciplinary Innovation &amp; Research (JIIR)</strong> is dedicated to
                 publishing foundational and applied research across Management, Education, Hospitality, Applied
                 Sciences, and Engineering. By uniting diverse scientific perspectives under one rigorous peer-reviewed
                 banner, JIIR provides an intellectual nexus for breakthroughs that transcend traditional academic boundaries.
               </p>
-              <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-navy-800 dark:text-navy-200">
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-bold text-slate-800">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Blind Peer Review
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Monthly Issues
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   International Indexing
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Global Open Access
                 </span>
               </div>
             </div>
 
-            <div className="lg:col-span-4 p-6 rounded-xl bg-navy-50/80 dark:bg-navy-950/40 border border-navy-100 dark:border-navy-900 space-y-4">
-              <h3 className="text-sm font-bold font-serif text-navy-900 dark:text-navy-100">
+            <div className="lg:col-span-4 p-6 rounded-xl bg-slate-50 border border-slate-200 space-y-4">
+              <h3 className="text-sm font-bold font-serif text-slate-900">
                 Interested in publishing with JIIR?
               </h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-xs text-slate-700 leading-relaxed">
                 Review our comprehensive author guidelines, formatting standards, and double-blind peer review policies.
               </p>
               <div className="space-y-2 pt-1">
                 <Link
                   href="/about"
-                  className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-border text-xs font-semibold hover:border-navy-400 transition-colors"
+                  className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-800 hover:border-navy-400 transition-colors shadow-sm"
                 >
-                  <span>Discover our Aims & Scope</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-primary" />
+                  <span>Discover our Aims &amp; Scope</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-navy-700" />
                 </Link>
                 <Link
                   href="/author-guidelines"
-                  className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-lg bg-navy-700 text-white text-xs font-semibold hover:bg-navy-800 transition-colors"
+                  className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-lg bg-navy-800 text-white text-xs font-bold hover:bg-navy-900 transition-colors shadow-sm"
                 >
                   <span>View Author Guidelines</span>
                   <ArrowRight className="w-3.5 h-3.5" />
