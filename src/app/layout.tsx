@@ -19,10 +19,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0B2570" },
-    { media: "(prefers-color-scheme: dark)", color: "#020819" },
-  ],
+  themeColor: "#0B2570",
 };
 
 export const metadata: Metadata = {
@@ -87,13 +84,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={poppins.variable}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} light`}>
       <body className="min-h-screen bg-background font-sans antialiased text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
+          forcedTheme="light"
           enableSystem={false}
-          storageKey="jiir-theme"
         >
           <SessionProvider>
             <QueryProvider>

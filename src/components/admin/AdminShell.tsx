@@ -25,7 +25,6 @@ import {
   X,
   LogOut,
   ChevronRight,
-  Sparkles,
 } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 
@@ -54,7 +53,7 @@ export const ADMIN_NAV_GROUPS: NavGroup[] = [
     group: "Core Editorial",
     items: [
       { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-      { label: "Manuscripts", href: "/admin/manuscripts", icon: FileText },
+      { label: "Manuscripts Queue", href: "/admin/manuscripts", icon: FileText },
       { label: "Issues & Volumes", href: "/admin/issues", icon: BookOpen },
       { label: "Published Articles", href: "/admin/articles", icon: Award },
       { label: "Editorial Board", href: "/admin/board", icon: ShieldCheck },
@@ -113,23 +112,23 @@ export function AdminShell({ user, children }: AdminShellProps) {
   const role = user.role ?? "EDITOR";
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-foreground antialiased">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased">
       {/* ─────────────────────────────────────────────
-          1. Top App Bar (Mobile & Desktop App Header)
+          1. Top App Bar (Header) - Deep Navy
          ───────────────────────────────────────────── */}
-      <header className="sticky top-0 z-40 bg-navy-950 text-white border-b border-navy-800 shadow-sm backdrop-blur-md">
+      <header className="sticky top-0 z-40 bg-navy-950 text-white border-b border-navy-800 shadow-sm">
         <div className="px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Left: Mobile Hamburger & Logo */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <button
               onClick={() => setDrawerOpen(true)}
-              className="md:hidden p-2 -ml-1 text-navy-200 hover:text-white hover:bg-navy-900 rounded-lg transition-colors focus:outline-none"
+              className="md:hidden p-2 -ml-1 text-slate-200 hover:text-white hover:bg-navy-900 rounded-lg transition-colors focus:outline-none"
               aria-label="Open Admin Navigation Drawer"
             >
               <Menu className="w-6 h-6" />
             </button>
 
-            <Logo size="sm" className="text-white" />
+            <Logo size="sm" invertText={true} />
 
             <span className="hidden sm:inline-flex px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-navy-900 text-brand-orange border border-navy-700">
               Admin Secretariat ({role})
@@ -137,11 +136,11 @@ export function AdminShell({ user, children }: AdminShellProps) {
           </div>
 
           {/* Right: Actions & User Info */}
-          <div className="flex items-center gap-3 text-xs">
+          <div className="flex items-center gap-3 text-xs shrink-0">
             <Link
               href="/"
               target="_blank"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-navy-900/80 hover:bg-navy-800 text-navy-200 hover:text-white transition-colors border border-navy-800"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-navy-900 hover:bg-navy-800 text-slate-200 hover:text-white transition-colors border border-navy-800 font-semibold"
             >
               <span>View Public Journal</span>
               <ExternalLink className="w-3.5 h-3.5 text-brand-orange" />
@@ -150,14 +149,14 @@ export function AdminShell({ user, children }: AdminShellProps) {
             <div className="h-4 w-[1px] bg-navy-800 hidden sm:block" />
 
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-orange to-brand-amber text-white flex items-center justify-center font-bold text-xs shadow-sm ring-1 ring-white/20">
+              <div className="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-xs shadow-sm ring-1 ring-white/20">
                 {user.name?.[0]?.toUpperCase() ?? "A"}
               </div>
               <div className="hidden sm:block text-left">
-                <span className="font-bold text-white max-w-[120px] truncate block leading-tight">
+                <span className="font-bold text-white max-w-[130px] truncate block leading-tight text-xs">
                   {user.name}
                 </span>
-                <span className="text-[10px] text-navy-400 block leading-tight">
+                <span className="text-[10px] text-slate-300 block leading-tight font-medium">
                   {role}
                 </span>
               </div>
@@ -173,11 +172,11 @@ export function AdminShell({ user, children }: AdminShellProps) {
           2. Main Container (Sidebar + Content Viewport)
          ───────────────────────────────────────────── */}
       <div className="flex-1 flex flex-col md:flex-row">
-        {/* Desktop Sidebar (Hidden on mobile!) */}
-        <aside className="hidden md:block w-64 bg-white dark:bg-slate-900 border-r border-border p-4 space-y-6 shrink-0 sticky top-[67px] h-[calc(100vh-67px)] overflow-y-auto">
+        {/* Desktop Sidebar: Pure Light Theme with high-contrast text */}
+        <aside className="hidden md:block w-64 bg-white border-r border-slate-200 p-4 space-y-6 shrink-0 sticky top-[67px] h-[calc(100vh-67px)] overflow-y-auto">
           {ADMIN_NAV_GROUPS.map((group) => (
             <div key={group.group} className="space-y-1">
-              <span className="px-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground block mb-1">
+              <span className="px-3 text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">
                 {group.group}
               </span>
               {group.items.map((item) => {
@@ -187,13 +186,13 @@ export function AdminShell({ user, children }: AdminShellProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                       isActive
-                        ? "bg-navy-600 text-white shadow-sm font-bold"
-                        : "text-foreground/80 hover:bg-muted hover:text-foreground"
+                        ? "bg-navy-700 text-white shadow-sm font-bold"
+                        : "text-slate-800 hover:bg-slate-100 hover:text-navy-950"
                     }`}
                   >
-                    <Icon className={`w-4 h-4 ${isActive ? "text-brand-orange" : "text-muted-foreground"}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? "text-brand-orange" : "text-navy-700"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -202,10 +201,10 @@ export function AdminShell({ user, children }: AdminShellProps) {
           ))}
 
           {/* Quick Sign Out in desktop sidebar */}
-          <div className="pt-4 border-t border-border">
+          <div className="pt-4 border-t border-slate-200">
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-destructive hover:bg-destructive/10 transition-colors"
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors"
             >
               <LogOut className="w-4 h-4" />
               <span>Sign Out Secretariat</span>
@@ -220,25 +219,25 @@ export function AdminShell({ user, children }: AdminShellProps) {
       </div>
 
       {/* ─────────────────────────────────────────────
-          3. Android Mobile Slide-Over Navigation Drawer
+          3. Android Mobile Slide-Over Navigation Drawer (Pure Light Theme)
          ───────────────────────────────────────────── */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 md:hidden flex">
           {/* Backdrop Overlay */}
           <div
             onClick={() => setDrawerOpen(false)}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
           />
 
-          {/* Drawer Sheet */}
-          <div className="relative w-[85vw] max-w-xs bg-white dark:bg-slate-900 text-foreground h-full flex flex-col shadow-2xl z-10 animate-in slide-in-from-left duration-250">
-            {/* Drawer Header */}
+          {/* Drawer Sheet: Pure White Background, 100% Crisp Visibility */}
+          <div className="relative w-[86vw] max-w-xs bg-white text-slate-900 h-full flex flex-col shadow-2xl z-10 animate-in slide-in-from-left duration-250 border-r border-slate-200">
+            {/* Drawer Header: Deep Navy */}
             <div className="p-4 bg-navy-950 text-white border-b border-navy-800">
               <div className="flex items-center justify-between mb-3">
-                <Logo size="sm" className="text-white" />
+                <Logo size="sm" invertText={true} />
                 <button
                   onClick={() => setDrawerOpen(false)}
-                  className="p-1.5 text-navy-300 hover:text-white rounded-lg hover:bg-navy-900"
+                  className="p-1.5 text-slate-300 hover:text-white rounded-lg hover:bg-navy-900"
                   aria-label="Close drawer"
                 >
                   <X className="w-5 h-5" />
@@ -246,17 +245,17 @@ export function AdminShell({ user, children }: AdminShellProps) {
               </div>
 
               {/* User Profile Card */}
-              <div className="flex items-center gap-3 p-2.5 rounded-xl bg-navy-900/80 border border-navy-800">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-orange to-brand-amber text-white flex items-center justify-center font-bold text-sm shadow">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-navy-900 border border-navy-800">
+                <div className="w-10 h-10 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-sm shadow">
                   {user.name?.[0]?.toUpperCase() ?? "A"}
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden flex-1">
                   <div className="flex items-center gap-1.5">
-                    <p className="text-xs font-bold text-white truncate">{user.name}</p>
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <p className="text-sm font-bold text-white truncate">{user.name}</p>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
                   </div>
-                  <p className="text-[10px] text-navy-300 truncate">{user.email}</p>
-                  <span className="inline-block mt-0.5 px-1.5 py-0.2 rounded bg-navy-800 text-[9px] font-bold text-brand-orange">
+                  <p className="text-xs text-slate-300 truncate">{user.email}</p>
+                  <span className="inline-block mt-1 px-1.5 py-0.2 rounded bg-navy-800 text-[10px] font-bold text-brand-orange border border-navy-700">
                     {role}
                   </span>
                 </div>
@@ -264,26 +263,26 @@ export function AdminShell({ user, children }: AdminShellProps) {
             </div>
 
             {/* Quick public journal link */}
-            <div className="p-3 bg-muted/40 border-b border-border">
+            <div className="p-3 bg-slate-50 border-b border-slate-200">
               <Link
                 href="/"
                 target="_blank"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg bg-navy-50 dark:bg-navy-950/60 text-navy-800 dark:text-navy-200 text-xs font-semibold border border-navy-200/50"
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white text-slate-900 text-sm font-semibold border border-slate-200 shadow-sm active:scale-95 transition-all"
               >
                 <span className="flex items-center gap-2">
-                  <ExternalLink className="w-3.5 h-3.5 text-brand-orange" />
+                  <ExternalLink className="w-4 h-4 text-brand-orange" />
                   <span>View Public Journal Site</span>
                 </span>
-                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
+                <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
             </div>
 
-            {/* Grouped Admin Modules List */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-5">
+            {/* Grouped Admin Modules List - 100% VISIBLE High-Contrast Labels */}
+            <div className="flex-1 overflow-y-auto p-3.5 space-y-4">
               {ADMIN_NAV_GROUPS.map((group) => (
                 <div key={group.group} className="space-y-1">
-                  <span className="px-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground block mb-1">
+                  <span className="px-2 text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">
                     {group.group}
                   </span>
                   {group.items.map((item) => {
@@ -294,17 +293,23 @@ export function AdminShell({ user, children }: AdminShellProps) {
                         key={item.href}
                         href={item.href}
                         onClick={() => setDrawerOpen(false)}
-                        className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                        className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                           isActive
-                            ? "bg-navy-600 text-white shadow-sm font-bold"
-                            : "text-foreground/80 hover:bg-muted"
+                            ? "bg-navy-700 text-white shadow-sm font-bold"
+                            : "text-slate-800 hover:bg-slate-100 active:bg-slate-200"
                         }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <Icon className={`w-4 h-4 ${isActive ? "text-brand-orange" : "text-muted-foreground"}`} />
-                          <span>{item.label}</span>
+                        <div className="flex items-center gap-3 min-w-0">
+                          <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-brand-orange" : "text-navy-700"}`} />
+                          <span className={`truncate ${isActive ? "text-white" : "text-slate-800 font-semibold"}`}>
+                            {item.label}
+                          </span>
                         </div>
-                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />}
+                        {isActive ? (
+                          <span className="w-2 h-2 rounded-full bg-brand-orange shrink-0 ml-2" />
+                        ) : (
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
+                        )}
                       </Link>
                     );
                   })}
@@ -313,10 +318,10 @@ export function AdminShell({ user, children }: AdminShellProps) {
             </div>
 
             {/* Drawer Footer with Sign Out */}
-            <div className="p-3 border-t border-border bg-background pb-safe">
+            <div className="p-3.5 border-t border-slate-200 bg-slate-50 pb-safe">
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-destructive/10 text-destructive text-xs font-bold hover:bg-destructive/20 transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-red-50 text-red-700 text-sm font-bold hover:bg-red-100 border border-red-200 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Sign Out Secretariat</span>
@@ -327,10 +332,10 @@ export function AdminShell({ user, children }: AdminShellProps) {
       )}
 
       {/* ─────────────────────────────────────────────
-          4. Admin Mobile Bottom Navigation Bar (Android Dock)
+          4. Admin Mobile Bottom Navigation Bar (Pure Light Theme)
          ───────────────────────────────────────────── */}
       <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-border shadow-[0_-4px_16px_rgba(0,0,0,0.06)] pb-safe"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-lg border-t border-slate-200 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] pb-safe"
         aria-label="Admin mobile navigation"
       >
         <div className="flex items-center justify-around h-16 px-1">
@@ -339,14 +344,14 @@ export function AdminShell({ user, children }: AdminShellProps) {
             href="/admin"
             className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
               pathname === "/admin"
-                ? "text-navy-600 dark:text-blue-400 font-bold scale-105"
-                : "text-muted-foreground hover:text-foreground"
+                ? "text-navy-700 font-bold scale-105"
+                : "text-slate-600 hover:text-navy-900"
             }`}
           >
-            <div className={`p-1 rounded-full ${pathname === "/admin" ? "bg-navy-100 dark:bg-navy-950/70" : ""}`}>
-              <LayoutDashboard className="w-5 h-5" />
+            <div className={`p-1 rounded-full ${pathname === "/admin" ? "bg-navy-50" : ""}`}>
+              <LayoutDashboard className="w-5 h-5 text-navy-800" />
             </div>
-            <span className="text-[10px] mt-0.5">Dashboard</span>
+            <span className="text-[11px] mt-0.5">Dashboard</span>
           </Link>
 
           {/* 2. Manuscripts */}
@@ -354,14 +359,14 @@ export function AdminShell({ user, children }: AdminShellProps) {
             href="/admin/manuscripts"
             className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
               pathname.startsWith("/admin/manuscripts")
-                ? "text-navy-600 dark:text-blue-400 font-bold scale-105"
-                : "text-muted-foreground hover:text-foreground"
+                ? "text-navy-700 font-bold scale-105"
+                : "text-slate-600 hover:text-navy-900"
             }`}
           >
-            <div className={`p-1 rounded-full ${pathname.startsWith("/admin/manuscripts") ? "bg-navy-100 dark:bg-navy-950/70" : ""}`}>
-              <FileText className="w-5 h-5" />
+            <div className={`p-1 rounded-full ${pathname.startsWith("/admin/manuscripts") ? "bg-navy-50" : ""}`}>
+              <FileText className="w-5 h-5 text-navy-800" />
             </div>
-            <span className="text-[10px] mt-0.5">Papers</span>
+            <span className="text-[11px] mt-0.5">Papers</span>
           </Link>
 
           {/* 3. Center Elevated FAB: Issues & Volumes */}
@@ -370,10 +375,10 @@ export function AdminShell({ user, children }: AdminShellProps) {
             className="flex flex-col items-center justify-center flex-1 -mt-5 group"
             title="Manage Issues & Volumes"
           >
-            <div className="w-13 h-13 rounded-full bg-gradient-to-tr from-navy-700 via-navy-800 to-brand-orange text-white flex items-center justify-center shadow-lg shadow-navy-900/40 ring-4 ring-background group-active:scale-95 transition-transform">
+            <div className="w-13 h-13 rounded-full bg-gradient-to-tr from-navy-700 via-navy-800 to-brand-orange text-white flex items-center justify-center shadow-lg shadow-navy-950/25 ring-4 ring-white group-active:scale-95 transition-transform">
               <BookOpen className="w-6 h-6 text-white" />
             </div>
-            <span className="text-[10px] font-bold text-foreground mt-0.5">Issues</span>
+            <span className="text-[11px] font-bold text-slate-900 mt-0.5">Issues</span>
           </Link>
 
           {/* 4. Payments */}
@@ -381,14 +386,14 @@ export function AdminShell({ user, children }: AdminShellProps) {
             href="/admin/payments"
             className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
               pathname.startsWith("/admin/payments")
-                ? "text-navy-600 dark:text-blue-400 font-bold scale-105"
-                : "text-muted-foreground hover:text-foreground"
+                ? "text-navy-700 font-bold scale-105"
+                : "text-slate-600 hover:text-navy-900"
             }`}
           >
-            <div className={`p-1 rounded-full ${pathname.startsWith("/admin/payments") ? "bg-navy-100 dark:bg-navy-950/70" : ""}`}>
-              <CreditCard className="w-5 h-5" />
+            <div className={`p-1 rounded-full ${pathname.startsWith("/admin/payments") ? "bg-navy-50" : ""}`}>
+              <CreditCard className="w-5 h-5 text-navy-800" />
             </div>
-            <span className="text-[10px] mt-0.5">Finance</span>
+            <span className="text-[11px] mt-0.5">Finance</span>
           </Link>
 
           {/* 5. Menu (Opens Admin Navigation Drawer) */}
@@ -397,14 +402,14 @@ export function AdminShell({ user, children }: AdminShellProps) {
             className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
               drawerOpen
                 ? "text-brand-orange font-bold scale-105"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-slate-600 hover:text-navy-900"
             }`}
             aria-label="Open all admin modules"
           >
             <div className={`p-1 rounded-full ${drawerOpen ? "bg-brand-orange/10" : ""}`}>
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5 h-5 text-slate-800" />
             </div>
-            <span className="text-[10px] mt-0.5">All Tools</span>
+            <span className="text-[11px] mt-0.5">All Tools</span>
           </button>
         </div>
       </nav>
