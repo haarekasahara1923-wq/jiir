@@ -16,7 +16,7 @@ export default async function PublicLayout({
     <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-navy-600 selection:text-white">
       <AnnouncementTicker settings={settings} />
       <Navbar settings={settings} navItems={navItems} />
-      <main className="flex-1 w-full">{children}</main>
+      <main className="flex-1 w-full pb-20 lg:pb-0">{children}</main>
       <Footer settings={settings} />
     </div>
   );

@@ -1,0 +1,24 @@
+{
+  "name": "JIIR - Journal of Interdisciplinary Innovation & Research",
+  "short_name": "JIIR Journal",
+  "description": "International Peer-Reviewed Academic Journal",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B2570",
+  "theme_color": "#0B2570",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/brand/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ interface HeroProps {
 
 export function Hero({ settings }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-navy-50/70 via-background to-background dark:from-navy-950/40 dark:via-background dark:to-background border-b border-border/40 py-16 lg:py-24">
+    <section className="relative overflow-hidden bg-gradient-to-b from-navy-50/70 via-background to-background dark:from-navy-950/40 dark:via-background dark:to-background border-b border-border/40 py-8 sm:py-16 lg:py-24">
       {/* Decorative background grid pattern */}
       <div className="absolute inset-0 bg-hero-pattern opacity-70 pointer-events-none" />
 
