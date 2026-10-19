@@ -92,17 +92,17 @@ export function Navbar({ settings, navItems }: NavbarProps) {
         }`}
       >
         {/* Announcement Ticker — lives inside the sticky wrapper */}
-        <div className="bg-navy-950 text-navy-100 py-1.5 border-b border-navy-800">
+        <div className="bg-navy-950 text-slate-200 py-1.5 border-b border-navy-800">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
             <div className="flex items-center gap-2 overflow-hidden flex-1">
               <span className="inline-flex items-center gap-1 font-bold text-brand-orange uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-brand-orange/15 shrink-0 whitespace-nowrap">
                 📢 Announcement
               </span>
-              <span className="truncate text-slate-300 text-xs font-medium">
+              <span className="truncate text-slate-200 text-xs font-medium">
                 Call for Papers 2026: Submissions open — Vol. 1, Issue 1 · Multidisciplinary Innovations.
               </span>
             </div>
-            <div className="hidden md:flex items-center gap-4 shrink-0 text-slate-400 text-xs">
+            <div className="hidden md:flex items-center gap-4 shrink-0 text-slate-300 text-xs">
               {settings.issnOnline && (
                 <span>
                   <strong className="text-white">ISSN (Online):</strong>{" "}{settings.issnOnline}

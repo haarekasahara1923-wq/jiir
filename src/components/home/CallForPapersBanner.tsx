@@ -82,7 +82,7 @@ export function CallForPapersBanner({
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-black text-white leading-tight">
               {issueLabel}
             </h2>
-            <p className="text-base text-navy-200 font-medium">
+            <p className="text-base text-slate-200 font-medium">
               Theme: <strong className="text-amber-300 font-semibold">{theme}</strong>
             </p>
           </div>
@@ -113,12 +113,12 @@ export function CallForPapersBanner({
 
           {/* Live Countdown Timer */}
           <div className="bg-navy-900/90 border border-navy-700/80 rounded-2xl p-4 sm:p-5 space-y-3">
-            <div className="flex items-center justify-between text-xs font-semibold text-slate-300">
+            <div className="flex items-center justify-between text-xs font-semibold text-slate-200">
               <span className="flex items-center gap-1.5 uppercase tracking-wider">
                 <Clock className="w-4 h-4 text-brand-orange" />
                 Submission Deadline Countdown
               </span>
-              <span className="text-slate-400">
+              <span className="text-slate-300">
                 {new Date(deadline || "2026-11-30").toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -132,25 +132,25 @@ export function CallForPapersBanner({
                 <span className="text-xl sm:text-3xl font-bold font-mono text-white block">
                   {timeLeft.days}
                 </span>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider">Days</span>
+                <span className="text-[10px] text-slate-200 uppercase tracking-wider font-semibold">Days</span>
               </div>
               <div className="bg-navy-950/90 border border-navy-800 rounded-xl p-2.5 sm:p-3">
                 <span className="text-xl sm:text-3xl font-bold font-mono text-white block">
                   {timeLeft.hours.toString().padStart(2, "0")}
                 </span>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider">Hours</span>
+                <span className="text-[10px] text-slate-200 uppercase tracking-wider font-semibold">Hours</span>
               </div>
               <div className="bg-navy-950/90 border border-navy-800 rounded-xl p-2.5 sm:p-3">
                 <span className="text-xl sm:text-3xl font-bold font-mono text-white block">
                   {timeLeft.minutes.toString().padStart(2, "0")}
                 </span>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider">Mins</span>
+                <span className="text-[10px] text-slate-200 uppercase tracking-wider font-semibold">Mins</span>
               </div>
               <div className="bg-navy-950/90 border border-navy-800 rounded-xl p-2.5 sm:p-3">
                 <span className="text-xl sm:text-3xl font-bold font-mono text-brand-orange block">
                   {timeLeft.seconds.toString().padStart(2, "0")}
                 </span>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider">Secs</span>
+                <span className="text-[10px] text-slate-200 uppercase tracking-wider font-semibold">Secs</span>
               </div>
             </div>
           </div>

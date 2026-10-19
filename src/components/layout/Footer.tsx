@@ -22,13 +22,13 @@ export function Footer({ settings }: FooterProps) {
           {/* Column 1: Journal Profile (Spans 2 cols on lg) */}
           <div className="lg:col-span-2 space-y-4">
             <Logo logoUrl={settings.logoUrl} size="lg" className="text-white" />
-            <p className="text-xs text-navy-200 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-200 leading-relaxed max-w-sm">
               {settings.tagline} — A premier multidisciplinary, peer-reviewed international
               academic journal dedicated to fostering cutting-edge cross-disciplinary research and
               scholarship across science, technology, management, and humanities.
             </p>
 
-            <div className="pt-2 space-y-2 text-xs text-navy-300">
+            <div className="pt-2 space-y-2 text-xs text-slate-300">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
                 <span>{settings.officeAddress}</span>
@@ -47,13 +47,13 @@ export function Footer({ settings }: FooterProps) {
 
             {/* ISSN & Frequency Badges */}
             <div className="pt-3 flex flex-wrap gap-2 text-[11px]">
-              <span className="px-2.5 py-1 rounded bg-navy-900 border border-navy-800 text-navy-200">
+              <span className="px-2.5 py-1 rounded bg-navy-900 border border-navy-700 text-slate-200">
                 <strong className="text-white">ISSN (Online):</strong> {settings.issnOnline}
               </span>
-              <span className="px-2.5 py-1 rounded bg-navy-900 border border-navy-800 text-navy-200">
+              <span className="px-2.5 py-1 rounded bg-navy-900 border border-navy-700 text-slate-200">
                 <strong className="text-white">ISSN (Print):</strong> {settings.issnPrint}
               </span>
-              <span className="px-2.5 py-1 rounded bg-navy-900 border border-navy-800 text-brand-orange">
+              <span className="px-2.5 py-1 rounded bg-navy-900 border border-navy-700 text-amber-300 font-bold">
                 Monthly Publication
               </span>
             </div>
@@ -64,7 +64,7 @@ export function Footer({ settings }: FooterProps) {
             <h3 className="text-sm font-serif font-bold text-white uppercase tracking-wider mb-4 border-b border-navy-800 pb-2">
               For Authors
             </h3>
-            <ul className="space-y-2.5 text-xs text-navy-300">
+            <ul className="space-y-2.5 text-xs text-slate-300">
               {defaultFooterNav.authors.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -102,7 +102,7 @@ export function Footer({ settings }: FooterProps) {
             <h3 className="text-sm font-serif font-bold text-white uppercase tracking-wider mb-4 border-b border-navy-800 pb-2">
               Connect & CFP
             </h3>
-            <ul className="space-y-2.5 text-xs text-navy-300 mb-6">
+            <ul className="space-y-2.5 text-xs text-slate-300 mb-6">
               {defaultFooterNav.connect.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -115,12 +115,12 @@ export function Footer({ settings }: FooterProps) {
               ))}
             </ul>
 
-            <div className="p-3 rounded-lg bg-navy-900/80 border border-navy-800 text-[11px] text-navy-300">
+            <div className="p-3 rounded-lg bg-white/5 border border-white/15 text-[11px] text-slate-300">
               <div className="flex items-center gap-1.5 font-bold text-white mb-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Editorial Independence</span>
               </div>
-              <p className="text-[10px] text-navy-300 leading-tight">
+              <p className="text-[10px] text-slate-300 leading-tight">
                 Peer review decisions are made exclusively on academic merit and scientific integrity.
               </p>
             </div>
@@ -128,19 +128,19 @@ export function Footer({ settings }: FooterProps) {
         </div>
 
         {/* Open Access & Licensing Notice */}
-        <div className="mt-12 pt-6 border-t border-navy-900 text-xs text-navy-300 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-6 border-t border-navy-800 text-xs text-slate-300 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded bg-navy-900 flex items-center justify-center shrink-0 border border-navy-800">
-              <Award className="w-5 h-5 text-brand-orange" />
+            <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
+              <Award className="w-5 h-5 text-amber-300" />
             </div>
-            <p className="text-[11px] max-w-2xl text-navy-300">
+            <p className="text-[11px] max-w-2xl text-slate-300 font-medium">
               <strong className="text-white">Open Access Policy:</strong> Articles published in JIIR
               are distributed under the terms of the{" "}
               <a
                 href="https://creativecommons.org/licenses/by-nc/4.0/"
                 target="_blank"
                 rel="noreferrer"
-                className="text-brand-orange hover:underline inline-flex items-center gap-0.5"
+                className="text-amber-300 hover:text-white hover:underline inline-flex items-center gap-0.5 font-bold transition-colors"
               >
                 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
                 <ExternalLink className="w-2.5 h-2.5 ml-0.5" />
@@ -152,7 +152,7 @@ export function Footer({ settings }: FooterProps) {
         </div>
 
         {/* Bottom Copyright Strip */}
-        <div className="mt-8 pt-4 border-t border-navy-900/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-navy-400">
+        <div className="mt-8 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
           <p>© {currentYear} Journal of Interdisciplinary Innovation & Research (JIIR). All Rights Reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
