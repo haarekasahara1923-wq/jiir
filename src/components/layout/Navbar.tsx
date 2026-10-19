@@ -125,7 +125,7 @@ export function Navbar({ settings, navItems }: NavbarProps) {
           <div className="flex items-center justify-between gap-4 h-18 lg:h-20 py-2">
 
             {/* LEFT: Mobile Drawer Button + Full Academic Logo */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0 overflow-hidden">
               <button
                 onClick={() => setMobileDrawerOpen(true)}
                 className="lg:hidden p-2 -ml-1 rounded-xl text-slate-800 hover:text-navy-900 hover:bg-slate-100 active:scale-95 transition-all flex-shrink-0"
@@ -233,33 +233,16 @@ export function Navbar({ settings, navItems }: NavbarProps) {
               </Link>
             </div>
 
-            {/* Mobile Top Bar Quick Actions */}
-            <div className="flex lg:hidden items-center gap-2 shrink-0">
+            {/* Mobile: Submit Paper CTA (compact, always visible, no overflow) */}
+            <div className="flex lg:hidden items-center shrink-0">
               <Link
-                href="/track-manuscript"
-                className="p-2 rounded-xl text-slate-700 hover:text-navy-900 hover:bg-slate-100"
-                aria-label="Track Manuscript"
-                title="Track Manuscript"
+                href="/submit-manuscript"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide text-white bg-gradient-to-r from-navy-700 to-navy-900 shadow-sm active:scale-95 transition-all whitespace-nowrap"
+                aria-label="Submit Paper"
               >
-                <SearchCheck className="w-5 h-5 text-navy-700" />
+                <Upload className="w-3.5 h-3.5 text-brand-orange" />
+                <span>Submit</span>
               </Link>
-
-              {session ? (
-                <Link
-                  href={isStaff ? "/admin" : "/scholar"}
-                  className="w-8 h-8 rounded-full bg-navy-700 text-white flex items-center justify-center font-bold text-xs shadow-sm ring-1 ring-navy-800"
-                  aria-label="Go to Dashboard"
-                >
-                  {user?.name?.[0]?.toUpperCase() ?? "U"}
-                </Link>
-              ) : (
-                <Link
-                  href="/login"
-                  className="px-3 py-1.5 text-xs font-bold rounded-lg bg-navy-700 text-white shadow-sm active:scale-95"
-                >
-                  Sign In
-                </Link>
-              )}
             </div>
           </div>
         </div>
