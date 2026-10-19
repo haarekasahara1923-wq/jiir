@@ -9,7 +9,7 @@ interface JournalCardProps {
 
 export function JournalCard({ settings }: JournalCardProps) {
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 relative z-20">
+    <section className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
       <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-5 sm:p-6 lg:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           {/* Logo & Identity (5 cols) */}

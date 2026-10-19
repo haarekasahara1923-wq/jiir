@@ -232,10 +232,10 @@ export default async function DynamicPublicPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto space-y-8">
         {/* Page Header */}
-        <div className="border-b border-border pb-6 space-y-2">
+        <div className="border-b border-border pb-6 space-y-2 text-left">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-navy-100 dark:bg-navy-950 text-navy-800 dark:text-navy-300">
               Journal Information
@@ -245,14 +245,14 @@ export default async function DynamicPublicPage({ params }: PageProps) {
             {page.title}
           </h1>
           {page.subtitle && (
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
               {page.subtitle}
             </p>
           )}
         </div>
 
         {/* Page Blocks */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 sm:p-10 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-border p-6 sm:p-10 shadow-sm text-left">
           <BlockRenderer blocks={page.blocks} />
         </div>
       </div>
