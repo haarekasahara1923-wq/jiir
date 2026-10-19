@@ -10,6 +10,8 @@ interface LogoProps {
   showText?: boolean;
   className?: string;
   invertText?: boolean;
+  /** When true, always render full branding (subtitle + tagline + badge). Default hides them on lg+ */
+  forceFullBranding?: boolean;
 }
 
 export function Logo({
@@ -18,6 +20,7 @@ export function Logo({
   showText = true,
   className = "",
   invertText = false,
+  forceFullBranding = false,
 }: LogoProps) {
   const [activeLogo, setActiveLogo] = useState(logoUrl || "/brand/logo.png");
   const [imageError, setImageError] = useState(false);
@@ -37,24 +40,24 @@ export function Logo({
   }, []);
 
   const dimensions = {
-    sm: { imgClass: "w-8 h-8 sm:w-9 sm:h-9", textSize: "text-base sm:text-lg", subSize: "text-[10px] sm:text-[11px]" },
-    md: { imgClass: "w-9 h-9 sm:w-11 sm:h-11", textSize: "text-lg sm:text-xl", subSize: "text-[11px] sm:text-xs" },
-    lg: { imgClass: "w-12 h-12 sm:w-14 sm:h-14", textSize: "text-xl sm:text-2xl", subSize: "text-xs sm:text-sm" },
-    xl: { imgClass: "w-16 h-16 sm:w-20 sm:h-20", textSize: "text-2xl sm:text-3xl", subSize: "text-sm" },
+    sm: { imgClass: "w-8 h-8 sm:w-9 sm:h-9",    textSize: "text-base sm:text-lg",   subSize: "text-[10px] sm:text-[11px]" },
+    md: { imgClass: "w-9 h-9 sm:w-10 sm:h-10",   textSize: "text-xl sm:text-2xl",    subSize: "text-[11px] sm:text-xs" },
+    lg: { imgClass: "w-12 h-12 sm:w-14 sm:h-14", textSize: "text-xl sm:text-2xl",    subSize: "text-xs sm:text-sm" },
+    xl: { imgClass: "w-16 h-16 sm:w-20 sm:h-20", textSize: "text-2xl sm:text-3xl",   subSize: "text-sm" },
   }[size];
 
   return (
     <Link
       href="/"
       className={cn(
-        "inline-flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg shrink-0",
+        "inline-flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg flex-shrink-0",
         className
       )}
     >
       {/* Official Logo Emblem */}
       <div
         className={cn(
-          "relative flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105",
+          "relative flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105",
           dimensions.imgClass
         )}
       >
@@ -72,41 +75,72 @@ export function Logo({
         )}
       </div>
 
-      {/* Styled Brand Nomenclature - Always crisp and high-contrast */}
+      {/* ─────────────────────────────────────────────
+          Brand Text
+          Desktop navbar (lg+): Only shows JIIR acronym letters.
+          Mobile & Drawer: Shows full branding via forceFullBranding=true.
+         ───────────────────────────────────────────── */}
       {showText && (
-        <div className="flex flex-col min-w-0">
-          <div className="flex items-center gap-2">
-            <span className={cn("font-black tracking-tight leading-none", dimensions.textSize)}>
+        <div className="flex flex-col min-w-0 overflow-hidden">
+
+          {/* Row 1: JIIR acronym + optional "Intl. Peer-Reviewed" pill */}
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className={cn("font-black tracking-tight leading-none flex-shrink-0", dimensions.textSize)}>
               <span className={invertText ? "text-white" : "text-[#0B2570]"}>J</span>
               <span className="text-[#D81B60]">I</span>
               <span className="text-[#E65100]">I</span>
               <span className="text-[#2E7D32]">R</span>
             </span>
+
+            {/*
+              Badge visibility rules:
+              - On desktop (lg+): HIDDEN to save horizontal space
+              - On sm-md (tablet/small laptop): visible
+              - In drawer (forceFullBranding=true): always visible
+            */}
             <span
               className={cn(
-                "hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded border leading-tight",
+                "px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded border leading-tight flex-shrink-0",
+                forceFullBranding
+                  ? "inline-flex"
+                  : "hidden sm:inline-flex lg:hidden",
                 invertText
                   ? "bg-white/10 text-white border-white/20"
                   : "bg-navy-50 text-navy-800 border-navy-200/60"
               )}
             >
-              International Peer-Reviewed
+              Intl. Peer-Reviewed
             </span>
           </div>
 
+          {/*
+            Row 2: Full journal subtitle
+            - On desktop (lg+): HIDDEN unless forceFullBranding
+            - On mobile/tablet: truncated, visible
+          */}
           <span
             className={cn(
-              "font-semibold leading-tight mt-0.5 truncate max-w-[210px] xs:max-w-[260px] sm:max-w-md",
+              "font-semibold leading-tight mt-0.5 truncate",
+              forceFullBranding
+                ? "max-w-[280px] inline-block"
+                : "max-w-[200px] sm:max-w-[260px] lg:hidden",
               dimensions.subSize,
-              invertText ? "text-white/90" : "text-slate-700"
+              invertText ? "text-white/90" : "text-slate-600"
             )}
           >
-            Journal of Interdisciplinary Innovation & Research
+            Journal of Interdisciplinary Innovation &amp; Research
           </span>
 
+          {/*
+            Row 3: Tagline
+            - On desktop (lg+): HIDDEN unless forceFullBranding
+          */}
           <span
             className={cn(
-              "text-[9px] uppercase tracking-widest hidden md:inline-block mt-0.5 font-medium",
+              "text-[9px] uppercase tracking-widest mt-0.5 font-medium",
+              forceFullBranding
+                ? "inline-block"
+                : "hidden sm:inline-block lg:hidden",
               invertText ? "text-slate-300" : "text-slate-500"
             )}
           >
